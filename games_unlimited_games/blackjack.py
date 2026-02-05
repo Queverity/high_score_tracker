@@ -73,11 +73,11 @@ def calculate_total(hand):
 def print_hands(player_hand, dealer_hand, reveal_dealer = False):
     
     if reveal_dealer:
-        print(f"Dealer's hand: {dealer_hand} (Total: {calculate_total(dealer_hand)})")
+        slow_print(f"Dealer's hand: {dealer_hand} (Total: {calculate_total(dealer_hand)})")
     else:
-        print(f"Dealer's showing: {dealer_hand[0]}")
+        slow_print(f"Dealer's showing: {dealer_hand[0]}")
     
-    print(f"Your hand: {player_hand} (Total: {calculate_total(player_hand)})")
+    slow_print(f"Your hand: {player_hand} (Total: {calculate_total(player_hand)})")
 
 
 
@@ -106,11 +106,11 @@ def check_blackjack(player_hand, dealer_hand):
 
     if player_total == 21:
         print_hands(player_hand, dealer_hand, reveal_dealer = True)
-        print("You got a Blackjack!")
+        slow_print("You got a Blackjack!")
         return True
     elif dealer_total == 21:
         print_hands(player_hand, dealer_hand, reveal_dealer = True)
-        print("Dealer got a Blackjack.")
+        slow_print("Dealer got a Blackjack.")
         return True
 
 
@@ -128,11 +128,25 @@ def game():
         blackjack_bet = input(f"How much do you want to bet, you have ${money}")
 
         if not blackjack_bet.isdigit():
-            print("Please enter valid number.")
+            print_slow("Please enter valid number.")
             clear_screen()
             continue
 
-        blackjack_bet = int(blackjack_bet)
+        blackjack_bet = int(blackjack_bet)\
+        
+        if blackjack_bet <= 0 or blackjack_bet > money:
+            print_slow("Please enter valid number.")
+            clear_screen()
+            continue
+
+        current_deck = create_deck()
+
+        player_hand = deal_hand(current_deck)
+
+        dealer_hand = deal_hand(current_deck)
+
+        print_hands(player_hand, dealer_hand)
+
 
 
 game()
