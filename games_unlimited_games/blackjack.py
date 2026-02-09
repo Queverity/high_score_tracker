@@ -73,11 +73,11 @@ def calculate_total(hand):
 def print_hands(player_hand, dealer_hand, reveal_dealer = False):
     
     if reveal_dealer:
-        slow_print(f"Dealer's hand: {dealer_hand} (Total: {calculate_total(dealer_hand)})")
+        print_slow(f"Dealer's hand: {dealer_hand} (Total: {calculate_total(dealer_hand)})")
     else:
-        slow_print(f"Dealer's showing: {dealer_hand[0]}")
+        print_slow(f"Dealer's showing: {dealer_hand[0]}")
     
-    slow_print(f"Your hand: {player_hand} (Total: {calculate_total(player_hand)})")
+    print_slow(f"Your hand: {player_hand} (Total: {calculate_total(player_hand)})")
 
 
 
@@ -106,11 +106,11 @@ def check_blackjack(player_hand, dealer_hand):
 
     if player_total == 21:
         print_hands(player_hand, dealer_hand, reveal_dealer = True)
-        slow_print("You got a Blackjack!")
+        print_slow("You got a Blackjack!")
         return True
     elif dealer_total == 21:
         print_hands(player_hand, dealer_hand, reveal_dealer = True)
-        slow_print("Dealer got a Blackjack.")
+        print_slow("Dealer got a Blackjack.")
         return True
 
 
