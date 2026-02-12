@@ -13,9 +13,15 @@ def print_slow(text):
     for letter in text:
         sys.stdout.write(letter)
         sys.stdout.flush()
-        time.sleep(0.07)
+        time.sleep(0.05)
 
     print()
+
+
+
+def continue_screen():
+    print_slow("Press Enter to continue.")
+    input()
 
 
 
@@ -116,20 +122,24 @@ def check_blackjack(player_hand, dealer_hand):
 
 
 
-def game():
+clear_screen()
 
-    clear_screen()
+money = 100
 
-    print_slow("Blackjacking time.")
+print_slow("Blackjacking time.")
 
-    money = 100
+
+
+def game(money):
 
     while True:
-
-        blackjack_bet = input(f"How much do you want to bet, you have ${money}\n$")
+        
+        print_slow(f"How much do you want to bet, you have ${money}:")
+        blackjack_bet = input("$")
 
         if not blackjack_bet.isdigit():
             print_slow("Please enter valid number.")
+            continue_screen()
             clear_screen()
             continue
 
@@ -137,6 +147,7 @@ def game():
         
         if blackjack_bet <= 0 or blackjack_bet > money:
             print_slow("Please enter valid number.")
+            continue_screen()
             clear_screen()
             continue
 
@@ -153,7 +164,7 @@ def game():
         
         while True:
             
-            choice = input("Hit or Stand\n:").strip().lower()
+            choice = input("Hit or Stand:\n").strip().lower()
 
             if choice == "hit":
                 hit(current_deck, player_hand)
@@ -174,7 +185,9 @@ def game():
             
             hit(current_deck, dealer_hand)
 
+        continue_screen()
         clear_screen()
+
 
         print_hands(player_hand, dealer_hand, reveal_dealer = True)
 
@@ -183,23 +196,33 @@ def game():
 
         if player_total > 21:
             print_slow("You busted.")
+            continue_screen()
+            clear_screen()
 
         elif dealer_total > 21:
             print_slow("Dealer busted.")
             money += blackjack_bet * 2
+            continue_screen()
+            clear_screen()
 
         elif player_total > dealer_total:
             print_slow("You win.")
             money += blackjack_bet * 2
+            continue_screen()
+            clear_screen()
 
-        elif player_total < dealer_hand:
+        elif player_total < dealer_total:
             print_slow("Dealer wins.")
+            continue_screen()
+            clear_screen()
 
-        elif player_total == dealer_hand:
+        elif player_total == dealer_total:
             print_slow("It's a tie.")
+            continue_screen()
+            clear_screen()
             money += blackjack_bet
 
         return
     
 while True:
-    game()
+    game(money)
