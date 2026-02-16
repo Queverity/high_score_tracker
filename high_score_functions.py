@@ -1,6 +1,6 @@
 # CB 1st High Score Functions
 
-# from game_data_parser import blackjack_scores,poker_scores,slots_scores
+from game_data_parser import blackjack_scores,poker_scores,slots_scores
 
 # define function personal_highs_printer(user_info,current_user):
     # ask user if they would like to view poker, slots, or blackjack high scores
@@ -33,3 +33,8 @@
     # grab those scores, put them into this piece of code
     # sorted_scores = {k: v for k, v in sorted(scores.items(), key=lambda item: item[1], reverse=True)} this sorts the scores high to low
     # iterate through the sorted_scores list, setting each item in the list to its position in the high score file
+
+def personal_highs_printer(current_user,user_info):
+    for i in user_info:
+        if i['username'] == current_user:
+            print(f"Poker High Score: {i}")
