@@ -7,9 +7,10 @@
 #define a function that checks if an account exists in the account cvs 
 
 #define a function that allows for the creation of the account using the already exists checker to check for the user name already exists if so make them use a diffrent username, and if the username is admin
-
+    #get there password
+    #hash there password and save its value
 #define a function that is called when the username is admin that allows for accounts to be removed
-
+    
 #define a function that edits the account csv removing or adding accounts to the user csv
 
 #A function that prints the list of users for the admin and takes a input for which account they want to choose than deletes them
