@@ -1,5 +1,6 @@
 #warrens helper function
-#define a function that checks if something exists in a cvs
+#soup
+#define a function that checks if something exists in a json
 
 
 #define a function that allows for the creation of the account using the already exists checker to check for the user name already exists if so make them use a diffrent username, and if the username is admin
@@ -30,5 +31,4 @@
 
 
 #Create a function that gets there username and uses the checking function to check if the username exists
-
 
