@@ -37,4 +37,62 @@ from game_data_parser import blackjack_scores,poker_scores,slots_scores
 def personal_highs_printer(current_user,user_info):
     for i in user_info:
         if i['username'] == current_user:
-            print(f"Poker High Score: {i}")
+            print(f"Poker High Score: {i['poker_score']}\nSlots High Score: {i['slots_score']}\nBlackjack High Score: {i['blackjack_score']}")
+            return
+        
+def personal_highs_setter(current_user,user_info,new_score,game):
+    match game:
+        case 'Poker':
+            for i in user_info:
+                if i['username'] == current_user:
+                    if i['poker_score'] < new_score:
+                        i['poker_score'] == new_score
+                        return
+                    else:
+                        return
+        case 'Slots':
+            for i in user_info:
+                if i['username'] == current_user:
+                    if i['slots_score'] < new_score:
+                        i['slots_score'] == new_score
+                        return
+                    else:
+                        return
+        case 'Blackjack':
+            for i in user_info:
+                if i['username'] == current_user:
+                    if i['blackjack_score'] < new_score:
+                        i['blackjack_score'] == new_score
+                        return
+                    else:
+                        return
+        case _:
+            print("Unexpected error")
+            return
+        
+def overall_highs_menu(poker_scores,blackjack_scores,slots_scores):
+    def top_ten_printer(mode):
+        count = 0
+        for user,score in mode.items():
+            if count == 10:
+                return
+            else:
+                count += 1
+                print(f"{count}. {user}: {score}")
+    while True:
+        game = input("Would you like to view high scores for Poker, Slots, or Blackjack?\n1. Poker\n2. Slots\n3. Blackjack\nEnter Number:\n").strip()
+        match game:
+            case "1":
+                top_ten_printer(mode=poker_scores)
+            case "2":
+                top_ten_printer(mode=slots_scores)
+            case "3":
+                top_ten_printer(mode=blackjack_scores)
+            case _:
+                print("Please enter 1, 2, or 3.")
+                continue
+        viewing = input("Would you like to view other high scores? Y/N").strip().capitalize()
+        if viewing == "Y":
+            continue
+        else:
+            break
