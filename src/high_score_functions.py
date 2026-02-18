@@ -96,3 +96,37 @@ def overall_highs_menu(poker_scores,blackjack_scores,slots_scores):
             continue
         else:
             break
+
+def overall_highs_setter(current_user,game,new_score,blackjack_scores,poker_scores,slots_scores):
+    while True:
+        match game:
+            case "Blackjack":
+                for name,score in blackjack_scores.items():
+                    if new_score > score:
+                        name = current_user
+                        score = new_score
+                        return
+                    else:
+                        pass
+                return
+            case "Poker":
+                for name,score in poker_scores.items():
+                    if new_score > score:
+                        name = current_user
+                        score = new_score
+                        return
+                    else:
+                        pass
+                return
+            case "Slots":
+                for name,score in slots_scores.items():
+                    if new_score > score:
+                        name = current_user
+                        score = new_score
+                        return
+                    else:
+                        pass
+                return
+            case _:
+                print(f"Unexpected value: {game}")
+
