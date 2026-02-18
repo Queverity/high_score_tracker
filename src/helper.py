@@ -1,33 +1,19 @@
 #warrens helper function
-#define a function that checks if something exists in a json
-
-
-#define a function that allows for the creation of the account using the already exists checker to check for the user name already exists if so make them use a diffrent username, and if the username is admin
-
-
-    #get there password
-
-
-    #hash there password and save its value
-
-
-#define a function that is called when the username is admin that allows for accounts to be removed
-
-
-#define a function that edits the account csv removing or adding accounts to the user csv
-
-
-#A function that prints the list of users for the admin and takes a input for which account they want to choose than deletes them
-
-
-#A function to encrypt saved passwords with the hashlib library using a specific encryption 
-
-
-#A function that shows the high scores for a game they choose and allows them to delete any of the high scores
-
-
-#Define a function that checks if the password given is matched when hashed with that which is saved with the username
-
-
-#Create a function that gets there username and uses the checking function to check if the username exists
-
+import csv
+#define a function that checks if something exists in a csv
+def exists(location, search):
+    try:
+        with open(location, mode="r") as file:
+            content = csv.reader(file)
+            headers = next(content)
+            rows = []
+            for line in content:
+                rows.append({headers[0]:line[0],headers[1]:line[1],headers[2]:line[2], headers[3]: line[3], headers[4]: line[4]})
+    except:
+        print("file does not exist. ")
+    if search in rows:
+        return "yes"
+    else:
+        return "I don't know what to say"
+def clear_screen():
+    print("\033c", end="")
