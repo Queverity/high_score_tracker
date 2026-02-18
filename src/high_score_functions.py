@@ -1,5 +1,6 @@
 # CB 1st High Score Functions
 
+import csv
 from game_data_parser import blackjack_scores,poker_scores,slots_scores
 
 # define function personal_highs_printer(user_info,current_user):
@@ -34,12 +35,22 @@ from game_data_parser import blackjack_scores,poker_scores,slots_scores
     # sorted_scores = {k: v for k, v in sorted(scores.items(), key=lambda item: item[1], reverse=True)} this sorts the scores high to low
     # iterate through the sorted_scores list, setting each item in the list to its position in the high score file
 
+def high_score_writing(user_scores,game_file_path):
+    with open(game_file_path,mode="w") as game:
+        pass
+
+    with open(game_file_path,mode="a",newline="") as game:
+        fieldnames = ['username','score']
+        dict_writer = csv.DictWriter(game,fieldnames)
+        for pair in user_scores:
+            dict_writer.writerow(pair)
+
 def personal_highs_printer(current_user,user_info):
     for i in user_info:
         if i['username'] == current_user:
             print(f"Poker High Score: {i['poker_score']}\nSlots High Score: {i['slots_score']}\nBlackjack High Score: {i['blackjack_score']}")
             return
-        
+
 def personal_highs_setter(current_user,user_info,new_score,game):
     match game:
         case 'Poker':
@@ -69,7 +80,7 @@ def personal_highs_setter(current_user,user_info,new_score,game):
         case _:
             print("Unexpected error")
             return
-        
+
 def overall_highs_menu(poker_scores,blackjack_scores,slots_scores):
     def top_ten_printer(mode):
         count = 0
@@ -97,36 +108,33 @@ def overall_highs_menu(poker_scores,blackjack_scores,slots_scores):
         else:
             break
 
-def overall_highs_setter(current_user,game,new_score,blackjack_scores,poker_scores,slots_scores):
+def overall_highs_setter(current_user,game,new_score,game_scores):
+    for name,score in game_scores.items():
+        if new_score > score:
+            name = current_user
+            score = new_score
+            return game_scores
+        else:
+            pass
+    return game_scores
+            
+def high_score_sorter(game,blackjack_scores,poker_scores,slots_scores):
+    def sorter_code(scores):
+        sorted_scores = {k: v for k, v in sorted(scores.items(), key=lambda item: item[1], reverse=True)}
+        return sorted_scores
     while True:
         match game:
             case "Blackjack":
-                for name,score in blackjack_scores.items():
-                    if new_score > score:
-                        name = current_user
-                        score = new_score
-                        return
-                    else:
-                        pass
+                sorted_scores = sorter_code(blackjack_scores)
+                high_score_writing(sorted_scores,'Documents//blackjack.py')
                 return
             case "Poker":
-                for name,score in poker_scores.items():
-                    if new_score > score:
-                        name = current_user
-                        score = new_score
-                        return
-                    else:
-                        pass
+                sorted_scores = sorter_code(poker_scores)
+                high_score_writing(sorted_scores,'Documents//poker.py')
                 return
             case "Slots":
-                for name,score in slots_scores.items():
-                    if new_score > score:
-                        name = current_user
-                        score = new_score
-                        return
-                    else:
-                        pass
+                sorted_scores = sorter_code(slots_scores)
+                high_score_writing(sorted_scores,'Documents//slots.py')
                 return
             case _:
                 print(f"Unexpected value: {game}")
-
