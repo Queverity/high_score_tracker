@@ -15,5 +15,7 @@ def exists(location, search):
         return "yes"
     else:
         return "I don't know what to say"
+    
+    
 def clear_screen():
     print("\033c", end="")
