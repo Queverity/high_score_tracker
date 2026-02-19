@@ -35,6 +35,10 @@ from game_data_parser import blackjack_scores,poker_scores,slots_scores
     # sorted_scores = {k: v for k, v in sorted(scores.items(), key=lambda item: item[1], reverse=True)} this sorts the scores high to low
     # iterate through the sorted_scores list, setting each item in the list to its position in the high score file
 
+# define high_score_writing(scores,game_file_path):
+    # clear the game file that we'll be writing to
+    # use DictWriter to write each pair from user_scores to the game file
+
 def high_score_writing(user_scores,game_file_path):
     with open(game_file_path,mode="w") as game:
         pass
