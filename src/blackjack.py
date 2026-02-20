@@ -4,9 +4,6 @@ import time
 import sys
 from helper import *
 
-def clear_screen():
-    print("\033c", end = "")
-
 
 
 def create_deck():
