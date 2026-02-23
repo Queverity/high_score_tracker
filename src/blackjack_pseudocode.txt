@@ -1,0 +1,53 @@
+function to create the deck
+    deck = list of all the cards
+    shuffle the deck
+
+function to deal the hands
+    hand = list of cards in hand
+    add two cards to hand
+
+funciton to calculate the total in a hand
+    add the value of all the cards together
+
+funciton to the print the hands of the dealer and player
+    print the hands
+
+funciton to hit the deck
+    add a random card from the deck to player hand
+
+function the check for blackjack
+    check the total value of a hand
+    if total = 21
+        blackjack = true
+
+money = 100
+
+print("Blackjacking time.")
+
+
+main function
+    loop
+    ask for bet
+    prepare the deck
+        loop
+            print hands
+            ask user to hit or stand
+            if choice = hit
+                hit function
+            if choice = stand
+                continue
+                
+        dealer hits till greater than 17
+
+        print the hands
+
+        pay out based on who won
+        if player wins
+            double bet and return the money
+        if dealer wins
+            player loses bet
+        if tie
+            player gains bet back    
+            
+loop
+    main function
