@@ -1,7 +1,6 @@
 # CB 1st High Score Functions
 
 import csv
-from game_data_parser import blackjack_scores,poker_scores,slots_scores
 
 # define function personal_highs_printer(user_info,current_user):
     # ask user if they would like to view poker, slots, or blackjack high scores
