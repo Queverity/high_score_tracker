@@ -46,12 +46,31 @@ def create_account():
         password = input("What do you want your password to be? It needs to be at least 12 characters long and have a lowercase letter, an uppercase letter, a number, and a special character.")
     #hash there password and save its value
 
+#A function that parses the account function
+def parse_user():
+    with open("Documents\\user_info.csv",mode="r",newline='') as scores:
+        fieldnames = ['username','score']
+        reader = csv.DictReader(scores,fieldnames)
+        users = []
+        for row in reader:
+            users.append(row)
+    return users
+def user_display():
+    user = parse_user()
+    for i in range(len(user)):
+        print(f"{i+1}. {user[i]["username"]}")
+    user_num = int(input("What user do you want to delete? Please input only the number. "))
+    return user_num
 
 #define a function that is called when the username is admin that allows for accounts to be removed
+def admin():
+    user_num = user_display()
 
 
 #define a function that edits the account csv removing or adding accounts to the user csv
-
+def add_remove(addorremove, addingorremoving):
+    if addorremove == "add":
+        
 
 #A function that prints the list of users for the admin and takes a input for which account they want to choose than deletes them
 
