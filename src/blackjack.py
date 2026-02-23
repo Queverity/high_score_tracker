@@ -222,7 +222,4 @@ def game(money):
             clear_screen()
             money += blackjack_bet
 
-        return
-    
-while True:
-    game(money)
+        return money

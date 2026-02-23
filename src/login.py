@@ -1,6 +1,40 @@
 from helper import *
 import hashlib as hash
+import string
 #define a function that allows for the creation of the account using the already exists checker to check for the user name already exists if so make them use a diffrent username, and if the username is admin
+
+special_characters = ["!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "-", "_", "=", "+", "[", "]", "{", "}", "|", ":", ";", "'", "<", ">", ",", ".", "?", "/", "`", "~"]
+
+def password_requirements(password):
+    if len(password) < 12:
+        print("Your password is not long enough.")
+        return
+    else:
+        for i in password:
+            if i in string.ascii_lowercase:
+                for a in password:
+                    if a in string.ascii_uppercase:
+                        for b in password:
+                            if b in string.digits:
+                                for c in password:
+                                    if c in special_characters:
+                                        return True
+                                    else:
+                                        pass
+                                print("You need a special character in your password.")
+                                return
+                            else:
+                                pass
+                        print("You need a number in your password.")
+                    else:
+                        pass
+                print("You need an uppercase letter in your password.")
+                return
+            else:
+                pass
+        print("You need a lowercase letter in your password.") 
+        return
+
 def create_account():
     username = input("What do you want your username to be")
     exist = exists("Documents\\user_info.csv", username)
@@ -8,11 +42,8 @@ def create_account():
         print("That username is available. ")
         clear_screen()
     else:
-        print("There is already a user with that as ther name please try again")
-        clear_screen()
-        create_account()
-    #get there password
-    password = input("What do you want your password to be. ")
+    #get their password
+        password = input("What do you want your password to be? It needs to be at least 12 characters long and have a lowercase letter, an uppercase letter, a number, and a special character.")
     #hash there password and save its value
 
 
