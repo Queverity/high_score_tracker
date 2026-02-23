@@ -2,26 +2,7 @@
 import random
 import time
 import sys
-
-def clear_screen(): 
-    print("\033c", end = "")
-
-
-
-def print_slow(text):
-
-    for letter in text:
-        sys.stdout.write(letter)
-        sys.stdout.flush()
-        time.sleep(0.05)
-
-    print()
-
-
-
-def continue_screen():
-    print_slow("Press Enter to continue.")
-    input()
+from helper import *
 
 
 
@@ -41,13 +22,13 @@ def deal_hand(deck, num_cards = 2):
 
     for _ in range(num_cards):
         card = deck.pop()
-        if card == 11: 
+        if card == 11:
             card = "J"
-        elif card == 12: 
+        elif card == 12:
             card = "Q"
-        elif card == 13: 
+        elif card == 13:
             card = "K"
-        elif card == 14: 
+        elif card == 14:
             card = "A"
         
         hand.append(card)

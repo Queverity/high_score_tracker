@@ -1,22 +1,23 @@
 import random
 import time as t
 import os
+from helper import *
 
-def clear_screen():
-    if os.name == 'nt':
-        os.system('CLS')
-    else:
-        os.system('clear')
+
 
 def spin_grid():
-    symbols = ['C', 'W', 'L', 'A', 'S']
+    symbols = ['🍒', '🥀', '😂', '🍎', '⭐']
     return [[random.choice(symbols) for _ in range(3)] for _ in range(3)]
+
+
 
 def print_grid(grid):
     print("*************")
     for row in grid:
         print("  ", " | ".join(row))
     print("*************")
+
+
 
 def get_payout(grid, bet):
     payout = 0
@@ -32,23 +33,27 @@ def get_payout(grid, bet):
 
     return payout
 
+
+
 def symbol_multiplier(symbol):
-    if symbol == 'C':
+    if symbol == '🍒':
         return 3
-    elif symbol == 'W':
+    elif symbol == '🥀':
         return 4
-    elif symbol == 'L':
+    elif symbol == '😂':
         return 5
-    elif symbol == 'A':
+    elif symbol == '🍎':
         return 10
-    elif symbol == 'S':
+    elif symbol == '⭐':
         return 20
     return 0
 
-def main():
+
+
+def not_main():
     money = 100
     print("   Welcome to slots!")
-    print("Symbols: C W L A S")
+    print("   Symbols: 🍒 🥀 😂 🍎 ⭐")
 
     while money > 0:
         print(f"\nCurrent money: ${money}")
@@ -94,13 +99,15 @@ def main():
 
     print(f"Game over!")
 
-def real_main():
+
+
+def main():
     while True:
-        main()
+        not_main()
         choice = input("Do you want to play again? Y/N:\n").upper()
         if choice != "Y":
             break
         else:
             clear_screen()
 
-real_main()
+main()
