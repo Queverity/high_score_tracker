@@ -198,4 +198,9 @@ def game():
             clear_screen()
             money += blackjack_bet
 
-        return money
+        quit = input("Would you like to continue playing? Y/N:\n").strip().capitalize()
+        if quit == "Y":
+            continue
+        else:
+            return money
+        
