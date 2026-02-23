@@ -120,17 +120,12 @@ def check_blackjack(player_hand, dealer_hand):
         print_slow("Dealer got a Blackjack.")
         return True
 
+def game():
+    clear_screen()
 
+    money = 100
 
-clear_screen()
-
-money = 100
-
-print_slow("Blackjacking time.")
-
-
-
-def game(money):
+    print_slow("Blackjacking time.")
 
     while True:
         
