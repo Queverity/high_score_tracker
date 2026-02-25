@@ -1,5 +1,7 @@
 #warrens helper function
 import csv
+import sys
+import time
 #define a function that checks if something exists in a csv
 def exists(location, search):
     try:
@@ -19,3 +21,18 @@ def exists(location, search):
     
 def clear_screen():
     print("\033c", end="")
+
+def print_slow(text):
+
+    for letter in text:
+        sys.stdout.write(letter)
+        sys.stdout.flush()
+        time.sleep(0.05)
+
+    print()
+
+
+
+def continue_screen():
+    print_slow("Press Enter to continue.")
+    input()
