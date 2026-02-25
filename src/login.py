@@ -46,7 +46,20 @@ def create_account():
         password = input("What do you want your password to be? It needs to be at least 12 characters long and have a lowercase letter, an uppercase letter, a number, and a special character.")
     #hash there password and save its value
 
-
+def user_login(user_info):
+    while True:
+        username = input("Enter your username, or type 'exit' to go back to main menu:\n").strip()
+        if username.lower() == 'exit':
+            return
+        else:
+            for i in user_info:
+                if i['username'].lower() == username.lower():
+                    password = input(f"Please enter your password {username}:\n").strip()
+                    # We'll need to set up the password checker to work properly with the hashlib library.
+                    # if the password is correct, move onto the game menu
+                    pass
+        print("Cannot find that username, either enter a valid one or make a new account")
+        continue
 #define a function that is called when the username is admin that allows for accounts to be removed
 
 
@@ -59,7 +72,7 @@ def create_account():
 #A function to encrypt saved passwords with the hashlib library using a specific encryption 
 
 
-#A function that shows the high scores for a game they choose and allows them to delete any of the high scores
+#A function that shows the high scores for a game they choose and allows them to delete any of the high scores for admin
 
 
 #Define a function that checks if the password given is matched when hashed with that which is saved with the username
