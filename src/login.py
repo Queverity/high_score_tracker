@@ -5,10 +5,10 @@ import string
 
 special_characters = ["!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "-", "_", "=", "+", "[", "]", "{", "}", "|", ":", ";", "'", "<", ">", ",", ".", "?", "/", "`", "~"]
 
-def password_requirements(password):
+def password_requirements(password, username):
     if len(password) < 12:
         print("Your password is not long enough.")
-        return
+        passwords(username)
     else:
         for i in password:
             if i in string.ascii_lowercase:
@@ -22,29 +22,38 @@ def password_requirements(password):
                                     else:
                                         pass
                                 print("You need a special character in your password.")
-                                return
+                                passwords(username)
                             else:
                                 pass
                         print("You need a number in your password.")
                     else:
                         pass
                 print("You need an uppercase letter in your password.")
-                return
+                passwords(username)
             else:
                 pass
         print("You need a lowercase letter in your password.") 
-        return
+        passwords(username)
 
 def create_account():
-    username = input("What do you want your username to be")
-    exist = exists("Documents\\user_info.csv", username)
+    account = {}
+    usernames = input("What do you want your username to be")
+    exist = exists("Documents\\user_info.csv", usernames)
     if exist == "yes":
-        print("That username is available. ")
+        print("That username is unavailable. ")
         clear_screen()
+        create_account()
     else:
-    #get their password
+        account["username"] = usernames
+        passwords(usernames)
+
+#make a function that gets there password and hashes it
+def passwords(username):
+ #get their password
         password = input("What do you want your password to be? It needs to be at least 12 characters long and have a lowercase letter, an uppercase letter, a number, and a special character.")
+        password_requirements(password, username)
     #hash there password and save its value
+        password = hashing(password)
 
 #A function that parses the account function
 def parse_user():
@@ -65,11 +74,19 @@ def user_display():
 #define a function that is called when the username is admin that allows for accounts to be removed
 def admin():
     user_num = user_display()
+    
 
 
 #define a function that edits the account csv removing or adding accounts to the user csv
-def add_remove(addorremove, addingorremoving):
-    if addorremove == "add":
+def add(username, password):
+    with open("Notes/sample.csv", 'r+', newline='') as csvfile:
+        feildnames = ["username", "password"]
+        reader=csv.reader(csvfile)
+        for line in reader:
+            print(f"{feildnames[0]}, {line[0]} favorite color {line[1]}")
+        writer = csv.DictWriter(csvfile, fieldnames=feildnames)
+        #writer.writeheader()
+        writer.writerow({'username':username, 'password':password})
         
 
 #A function that prints the list of users for the admin and takes a input for which account they want to choose than deletes them
@@ -86,3 +103,8 @@ def add_remove(addorremove, addingorremoving):
 
 #Create a function that gets there username and uses the checking function to check if the username exists
 
+#A function that hashes a string
+def hashing(item):
+    sha256 = hash.sha256()
+    sha256.update(item)
+    return sha256.hexdigest()
