@@ -45,14 +45,14 @@ def parse_blackjack():
             blackjack_scores.append(row)
     return blackjack_scores
 
-def parse_poker():
+"""def parse_poker():
     with open("Documents//poker_scores.csv",mode="r",newline='') as scores:
         fieldnames = ['username','score']
         reader = csv.DictReader(scores,fieldnames)
         poker_scores = []
         for row in reader:
             poker_scores.append(row)
-    return poker_scores
+    return poker_scores"""
 
 def parse_slots():
     with open("Documents//slots_scores.csv",mode="r",newline='') as scores:
@@ -64,8 +64,5 @@ def parse_slots():
     return slots_scores
 
 blackjack_scores = parse_blackjack()
-poker_scores = parse_poker()
+# poker_scores = parse_poker()
 slots_scores = parse_slots()
-
-for i in blackjack_scores:
-    print(f"{i['username']}: {i['score']}")
