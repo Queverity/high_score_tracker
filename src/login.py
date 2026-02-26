@@ -57,6 +57,7 @@ def user_login(user_info):
                     password = input(f"Please enter your password {username}:\n").strip()
                     # We'll need to set up the password checker to work properly with the hashlib library.
                     # if the password is correct, move onto the game menu
+                    # if the password is incorrect, let them try again (limit this for a few times, maybe add a timer after)
                     pass
         print("Cannot find that username, either enter a valid one or make a new account")
         continue

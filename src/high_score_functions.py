@@ -94,16 +94,14 @@ def overall_highs_menu(poker_scores,blackjack_scores,slots_scores):
                 count += 1
                 print(f"{count}. {user}: {score}")
     while True:
-        game = input("Would you like to view high scores for Poker, Slots, or Blackjack?\n1. Poker\n2. Slots\n3. Blackjack\nEnter Number:\n").strip()
+        game = input("Would you like to view high scores for Poker, Slots, or Blackjack?\n1. Slots\n2. Blackjack\nEnter Number:\n").strip()
         match game:
             case "1":
-                top_ten_printer(mode=poker_scores)
-            case "2":
                 top_ten_printer(mode=slots_scores)
-            case "3":
+            case "2":
                 top_ten_printer(mode=blackjack_scores)
             case _:
-                print("Please enter 1, 2, or 3.")
+                print("Please enter 1, or 2.")
                 continue
         viewing = input("Would you like to view other high scores? Y/N").strip().capitalize()
         if viewing == "Y":
