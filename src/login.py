@@ -1,9 +1,11 @@
 from helper import *
 import hashlib as hash
 import string
+from game_data_parser import *
 #define a function that allows for the creation of the account using the already exists checker to check for the user name already exists if so make them use a diffrent username, and if the username is admin
 
 special_characters = ["!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "-", "_", "=", "+", "[", "]", "{", "}", "|", ":", ";", "'", "<", ">", ",", ".", "?", "/", "`", "~"]
+
 
 def password_requirements(password, username):
     if len(password) < 12:
@@ -58,7 +60,7 @@ def passwords(username):
 #A function that parses the account function
 def parse_user():
     with open("Documents\\user_info.csv",mode="r",newline='') as scores:
-        fieldnames = ['username','score']
+        fieldnames = ['username','password','score']
         reader = csv.DictReader(scores,fieldnames)
         users = []
         for row in reader:
@@ -90,44 +92,31 @@ def add(username, password):
         #writer.writeheader()
         writer.writerow({'username':username, 'password':password})
         
+#A function that prints the list of users for the admin and takes a input for which account they want to choose than deletes them
+def poker_display():
+    user = parse_slots()
+    for i in range(len(user)):
+        print(f"{i+1}. {user[i]["username"]}")
+    user_num = int(input("What user do you want to delete? Please input only the number. "))
+    return user_num
 
-#A function that shows the high scores for a game they choose and allows them to delete any of the high scores
-def parse_blackjack():
-    with open("Documents//blackjack_scores.csv",mode="r",newline='') as scores:
-        fieldnames = ['username','score']
-        reader = csv.DictReader(scores,fieldnames)
-        blackjack_scores = []
-        for row in reader:
-            blackjack_scores.append(row)
-    return blackjack_scores
+accounts = parse_user()
 
-def parse_poker():
-    with open("Documents//poker_scores.csv",mode="r",newline='') as scores:
-        fieldnames = ['username','score']
-        reader = csv.DictReader(scores,fieldnames)
-        poker_scores = []
-        for row in reader:
-            poker_scores.append(row)
-    return poker_scores
-
-def parse_slots():
-    with open("Documents//slots_scores.csv",mode="r",newline='') as scores:
-        fieldnames = ['username','score']
-        reader = csv.DictReader(scores,fieldnames)
-        slots_scores = []
-        for row in reader:
-            slots_scores.append(row)
-    return slots_scores
-
-#Define a function that checks if the password given is matched when hashed with that which is saved with the username
-def hash_check(password):
-    sha256 = hash.sha256()
-    sha256.update(password)
-    return sha256.hexdigest()
 
 #Create a function that gets there username and uses the checking function to check if the username exists
 def login():
-    username = input("What is your username? "):
+    username = input("What is your username? ")
+    exists = exists(username)
+    if exists == "yes":
+        for i in accounts:
+            if username == i["username"]:
+                password = input("What is your password? ")
+                password = hashing(password)
+                if i["password"] == password:
+
+
+    else:
+        print("Username does not exist. ")
     
 
 #A function that hashes a string
