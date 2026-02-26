@@ -95,7 +95,11 @@ def not_main():
         if play_again != 'Y':
             break
         else:
-            clear_screen()
+            quit = input("Would you like to continue playing? Y/N:\n").strip().capitalize()
+            if quit == "Y":
+                return money
+            else:
+                clear_screen()
 
     print(f"Game over!")
 
@@ -110,4 +114,3 @@ def main():
         else:
             clear_screen()
 
-main()

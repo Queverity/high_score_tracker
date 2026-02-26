@@ -64,6 +64,8 @@ def parse_user():
         for row in reader:
             users.append(row)
     return users
+
+#A function that prints the list of users for the admin and takes a input for which account they want to choose than deletes them
 def user_display():
     user = parse_user()
     for i in range(len(user)):
@@ -89,19 +91,44 @@ def add(username, password):
         writer.writerow({'username':username, 'password':password})
         
 
-#A function that prints the list of users for the admin and takes a input for which account they want to choose than deletes them
-
-
-#A function to encrypt saved passwords with the hashlib library using a specific encryption 
-
-
 #A function that shows the high scores for a game they choose and allows them to delete any of the high scores
+def parse_blackjack():
+    with open("Documents//blackjack_scores.csv",mode="r",newline='') as scores:
+        fieldnames = ['username','score']
+        reader = csv.DictReader(scores,fieldnames)
+        blackjack_scores = []
+        for row in reader:
+            blackjack_scores.append(row)
+    return blackjack_scores
 
+def parse_poker():
+    with open("Documents//poker_scores.csv",mode="r",newline='') as scores:
+        fieldnames = ['username','score']
+        reader = csv.DictReader(scores,fieldnames)
+        poker_scores = []
+        for row in reader:
+            poker_scores.append(row)
+    return poker_scores
+
+def parse_slots():
+    with open("Documents//slots_scores.csv",mode="r",newline='') as scores:
+        fieldnames = ['username','score']
+        reader = csv.DictReader(scores,fieldnames)
+        slots_scores = []
+        for row in reader:
+            slots_scores.append(row)
+    return slots_scores
 
 #Define a function that checks if the password given is matched when hashed with that which is saved with the username
-
+def hash_check(password):
+    sha256 = hash.sha256()
+    sha256.update(password)
+    return sha256.hexdigest()
 
 #Create a function that gets there username and uses the checking function to check if the username exists
+def login():
+    username = input("What is your username? "):
+    
 
 #A function that hashes a string
 def hashing(item):
