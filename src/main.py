@@ -2,6 +2,7 @@
 #import all of the needed function from the helper file
 from helper import *
 from login import *
+from games import *
 #define the main menu function 
 def menu():
     #use match case to determine what login function they are using and call it.
@@ -15,7 +16,7 @@ def menu():
                 clear_screen
                 login()
             case "2":
-
+                game_menu()
             case "3":
                 clear_screen
                 create_account()
