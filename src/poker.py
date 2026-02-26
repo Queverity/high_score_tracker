@@ -17,7 +17,7 @@ def card_str(card):
         14: "Ace"
     }
     r, s = card
-    return f"{faces.get(r,r){s}}"
+    return f"{faces.get(r,r),{s}}"
 
 
 

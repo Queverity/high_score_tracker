@@ -1,7 +1,7 @@
 #Main Function for the High Score Tracker - PB, WG, DJ - 1st Period
 #import all of the needed function from the helper file
 from helper import *
-
+from login import *
 #define the main menu function 
 def menu():
     #use match case to determine what login function they are using and call it.
@@ -12,9 +12,13 @@ def menu():
         action = input()
         match action:
             case "1":
-
+                clear_screen
+                login()
             case "2":
 
             case "3":
-
+                clear_screen
+                create_account()
             case "4":
+                clear_screen
+                exit()

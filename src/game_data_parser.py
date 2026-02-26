@@ -66,3 +66,6 @@ def parse_slots():
 blackjack_scores = parse_blackjack()
 # poker_scores = parse_poker()
 slots_scores = parse_slots()
+
+for i in blackjack_scores:
+    print(f"{i['username']}: {i['score']}")
