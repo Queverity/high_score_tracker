@@ -1,15 +1,20 @@
 # DJ 1st Games
 
-def overall_game_menu():
+from high_score_functions import personal_highs_printer,personal_highs_setter,overall_highs_menu,overall_highs_setter,high_score_sorter,high_score_writing
+
+from game_data_parser import slots_scores,blackjack_scores,user_info
+
+
+def overall_game_menu(username):
     while True:
         print("What would you like to do?\n1. View Personal High Scores\n2. View All-Time High Scores\n3. Play Games\n4. Exit")
         action = input("Enter Number:\n").strip().lower()
         match action:
             case "1":
-                # call personal high score function from pryor's files
+                personal_highs_printer(username,user_info)
                 pass
             case "2":
-                # call overall high scores function from pryor's files
+                overall_highs_menu(blackjack_scores,slots_scores)
                 pass
             case "3":
                 # go to game menu function
@@ -38,7 +43,7 @@ def game_menu():
                 # ask if user would like to continue playing other games
                 pass
             case "2":
-                # run slots game
+                # run blackjack game
                 # go through all the high score finding and sorting stuff
                 # ask if user would like to continue playing other games
                 pass

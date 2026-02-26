@@ -75,6 +75,21 @@ def user_display():
     user_num = int(input("What user do you want to delete? Please input only the number. "))
     return user_num
 
+def user_login(user_info):
+    while True:
+        username = input("Enter your username, or type 'exit' to go back to main menu:\n").strip()
+        if username.lower() == 'exit':
+            return
+        else:
+            for i in user_info:
+                if i['username'].lower() == username.lower():
+                    password = input(f"Please enter your password {username}:\n").strip()
+                    # We'll need to set up the password checker to work properly with the hashlib library.
+                    # if the password is correct, move onto the game menu
+                    # if the password is incorrect, let them try again (limit this for a few times, maybe add a timer after)
+                    pass
+        print("Cannot find that username, either enter a valid one or make a new account")
+        continue
 #define a function that is called when the username is admin that allows for accounts to be removed
 def admin():
     user_num = user_display()

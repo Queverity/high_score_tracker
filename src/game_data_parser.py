@@ -63,9 +63,19 @@ def parse_slots():
             slots_scores.append(row)
     return slots_scores
 
+def parse_user_info():
+    with open("Documents//user_info.csv",mode="r",newline='') as userinfo:
+        fieldnames = ['username','password','poker_score','slots_score','blackjack_score']
+        reader = csv.DictReader(userinfo,fieldnames)
+        user_info = []
+        for row in reader:
+            slots_scores.append(user_info)
+    return user_info
+
 blackjack_scores = parse_blackjack()
 # poker_scores = parse_poker()
 slots_scores = parse_slots()
+user_info = parse_user_info()
 
 for i in blackjack_scores:
     print(f"{i['username']}: {i['score']}")
