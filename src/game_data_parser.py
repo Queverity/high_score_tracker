@@ -72,6 +72,25 @@ def parse_user_info():
             slots_scores.append(user_info)
     return user_info
 
+def save_score_files(file_path,data):
+    with open(file_path,mode="w") as file:
+        fieldnames = ['username','high_score']
+        writer = csv.DictWriter(file,fieldnames)
+
+        for i in data:
+            writer.writerow(i)
+
+def save_user_info(data):
+    with open("Documents\user_info.csv",mode="w") as user_info:
+        fieldnames = ['username','password','poker_score','slots_score','blackjack_score']       
+        writer = csv.DictWriter(user_info,fieldnames)
+
+        for i in data:
+            writer.writerow(i)     
+
+    
+
+
 blackjack_scores = parse_blackjack()
 poker_scores = parse_poker()
 slots_scores = parse_slots()
