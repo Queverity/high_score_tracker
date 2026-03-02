@@ -109,11 +109,12 @@ def overall_highs_menu(poker_scores,blackjack_scores,slots_scores):
         else:
             break
 
-def overall_highs_setter(current_user,game,new_score,game_scores):
+def overall_highs_setter(current_user,new_score,game_scores):
     for name,score in game_scores.items():
         if new_score > score:
             name = current_user
             score = new_score
+            print("You have set a new high score! View overall high scores in the main menu to see where you stand on the leaderboard.")
             return game_scores
         else:
             pass
