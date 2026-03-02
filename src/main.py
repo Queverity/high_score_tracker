@@ -17,7 +17,7 @@ def menu():
                 login()
             case "2":
                 clear_screen()
-                game_menu()
+                overall_game_menu(current_user="Guest")
             case "3":
                 clear_screen()
                 create_account()
