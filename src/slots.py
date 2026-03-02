@@ -105,12 +105,13 @@ def not_main():
 
 
 
-def main():
+def slots_main():
     while True:
-        not_main()
+        money = not_main()
         choice = input("Do you want to play again? Y/N:\n").upper()
         if choice != "Y":
             break
         else:
+            return money
             clear_screen()
 
