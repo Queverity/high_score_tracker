@@ -45,14 +45,14 @@ def parse_blackjack():
             blackjack_scores.append(row)
     return blackjack_scores
 
-"""def parse_poker():
+def parse_poker():
     with open("Documents//poker_scores.csv",mode="r",newline='') as scores:
         fieldnames = ['username','score']
         reader = csv.DictReader(scores,fieldnames)
         poker_scores = []
         for row in reader:
             poker_scores.append(row)
-    return poker_scores"""
+    return poker_scores
 
 def parse_slots():
     with open("Documents//slots_scores.csv",mode="r",newline='') as scores:
@@ -72,8 +72,27 @@ def parse_user_info():
             slots_scores.append(user_info)
     return user_info
 
+def save_score_files(file_path,data):
+    with open(file_path,mode="w") as file:
+        fieldnames = ['username','high_score']
+        writer = csv.DictWriter(file,fieldnames)
+
+        for i in data:
+            writer.writerow(i)
+
+def save_user_info(data):
+    with open("Documents\user_info.csv",mode="w") as user_info:
+        fieldnames = ['username','password','poker_score','slots_score','blackjack_score']       
+        writer = csv.DictWriter(user_info,fieldnames)
+
+        for i in data:
+            writer.writerow(i)     
+
+    
+
+
 blackjack_scores = parse_blackjack()
-# poker_scores = parse_poker()
+poker_scores = parse_poker()
 slots_scores = parse_slots()
 user_info = parse_user_info()
 
