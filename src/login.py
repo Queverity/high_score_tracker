@@ -2,6 +2,8 @@ from helper import *
 import hashlib as hash
 import string
 from game_data_parser import *
+from games import *
+import csv
 
 #define a function that allows for the creation of the account using the already exists checker to check for the user name already exists if so make them use a diffrent username, and if the username is admin
 special_characters = ["!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "-", "_", "=", "+", "[", "]", "{", "}", "|", ":", ";", "'", "<", ">", ",", ".", "?", "/", "`", "~"]
@@ -94,36 +96,22 @@ def user_display():
     user_num = int(input("What user do you want to delete? Please input only the number. "))
     return user_num
 
-def user_login(user_info):
+accounts = parse_user()
 
-    while True:
-        username = input("Enter your username, or type 'exit' to go back to main menu:\n").strip()
-
-        if username.lower() == 'exit':
-            return
-
-        else:
-
-            for i in user_info:
-
-                if i['username'].lower() == username.lower():
-                    password = input(f"Please enter your password {username}:\n").strip()
-                    # We'll need to set up the password checker to work properly with the hashlib library.
-                    # if the password is correct, move onto the game menu
-                    # if the password is incorrect, let them try again (limit this for a few times, maybe add a timer after)
-                    pass
-        print("Cannot find that username, either enter a valid one or make a new account")
-        continue
-
+def remove(removing):
+    accounts.remove(removing)
+    try:
+        with open("Documents\\user_info.csv",mode="w") as users:
+            users.write
 #define a function that is called when the username is admin that allows for accounts to be removed
 def admin():
     print("To delete an account press 1\nTo delete a high score press 2\nTo exit press 3")
     action = input()
     match action:
         case "1":
-            user_num = user_display()
-    
-
+            user_display()
+            removing = input("Please input the number you want to delete. ")
+            remove(accounts[removing-1])
 
 #define a function that edits the account csv removing or adding accounts to the user csv
 def add(username, password):
@@ -147,28 +135,27 @@ def poker_display():
     user_num = int(input("What user do you want to delete? Please input only the number. "))
     return user_num
 
-accounts = parse_user()
-
 
 #Create a function that gets there username and uses the checking function to check if the username exists
 def login():
-    username = input("What is your username? ")
-    exists = exists(username)
+    while True:
+        username = input("What is your username? ")
+        exists = exists(username)
 
-    if exists == "yes":
+        if exists == "yes":
 
-        for i in accounts:
+            for i in accounts:
 
-            if username == i["username"]:
-                password = input("What is your password? ")
-                password = hashing(password)
+                if username == i["username"]:
+                    password = input("What is your password? ")
+                    password = hashing(password)
 
-                if i["password"] == password:
-                    ()
+                    if i["password"] == password:
+                        game_menu()
 
-    else:
-        print("Username does not exist. ")
-    
+        else:
+            print("Username does not exist. ")
+        
 
 #A function that hashes a string
 def hashing(item):

@@ -13,12 +13,13 @@ def menu():
         action = input()
         match action:
             case "1":
-                clear_screen
+                clear_screen()
                 login()
             case "2":
+                clear_screen()
                 game_menu()
             case "3":
-                clear_screen
+                clear_screen()
                 create_account()
             case "4":
                 clear_screen
