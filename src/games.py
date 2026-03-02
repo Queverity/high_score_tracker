@@ -1,5 +1,5 @@
 # DJ 1st Games
-
+from helper import *
 from high_score_functions import personal_highs_printer,personal_highs_setter,overall_highs_menu,overall_highs_setter,high_score_sorter,high_score_writing
 
 from game_data_parser import slots_scores,blackjack_scores,user_info
@@ -34,7 +34,7 @@ def overall_game_menu(username):
 
 def game_menu():
     while True:
-        print("What game would you like to play?\n1. Slots\n2. Blackjack")
+        print("What game would you like to play?\n1. Slots\n2. Blackjack\n3. Exits")
         game = input("Enter number:\n").strip().capitalize()
         match game:
             case "1":
@@ -47,6 +47,9 @@ def game_menu():
                 # go through all the high score finding and sorting stuff
                 # ask if user would like to continue playing other games
                 pass
+            case "3":
+                clear_screen()
+                exit()
             case _:
                 print("Please enter 1 or 2.")
                 continue
