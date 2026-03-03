@@ -49,12 +49,17 @@ def high_score_writing(user_scores,game_file_path):
             dict_writer.writerow(pair)
 
 def personal_highs_printer(current_user,user_info):
-    for i in user_info:
-        if i['username'] == current_user:
-            print(f"Poker High Score: {i['poker_score']}\nSlots High Score: {i['slots_score']}\nBlackjack High Score: {i['blackjack_score']}")
-            return
+    if current_user == "Guest": 
+        print("You are a guest, and thus your personal high scores are not saved. Perhaps make an account?")
+        return
+    else:
+        for i in user_info:
+            if i['username'] == current_user:
+                print(f"Poker High Score: {i['poker_score']}\nSlots High Score: {i['slots_score']}\nBlackjack High Score: {i['blackjack_score']}")
+                return
 
 def personal_highs_setter(current_user,user_info,new_score,game):
+    if current_user == "Guest": return
     match game:
         case 'Poker':
             for i in user_info:

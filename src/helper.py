@@ -13,10 +13,10 @@ def exists(location, search):
                 rows.append({headers[0]:line[0],headers[1]:line[1],headers[2]:line[2], headers[3]: line[3], headers[4]: line[4]})
     except:
         print("file does not exist. ")
-    if search in rows:
-        return "yes"
+        return "no"
     else:
-        return "I don't know what to say"
+        if search in rows:
+            return "yes"
     
     
 def clear_screen():

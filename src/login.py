@@ -78,7 +78,7 @@ def passwords(username):
 #A function that parses the account function
 def parse_user():
 
-    with open("Documents\\user_info.csv",mode="r",newline='') as scores:
+    with open("Documents//user_info.csv",mode="r",newline='') as scores:
         fieldnames = ['username','password','score']
         reader = csv.DictReader(scores,fieldnames)
         users = []
@@ -103,6 +103,8 @@ def remove(removing):
     try:
         with open("Documents\\user_info.csv",mode="w") as users:
             users.write
+    except:
+        print("The thingy didn't work.")
 #define a function that is called when the username is admin that allows for accounts to be removed
 def admin():
     print("To delete an account press 1\nTo delete a high score press 2\nTo exit press 3")
@@ -140,7 +142,7 @@ def poker_display():
 def login():
     while True:
         username = input("What is your username? ")
-        exists = exists(username)
+        exists = exists("Documents//user_info.csv",username)
 
         if exists == "yes":
 
