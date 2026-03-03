@@ -23,11 +23,8 @@ def menu():
                 clear_screen()
                 create_account()
             case "4":
-                clear_screen()
+                clear_screen
                 exit()
             case _:
-                print("Please enter 1, 2, 3, or 4.")
-                clear_screen()
-                continue
-
+                print("That is not a valid option. Please try again.")
 menu()

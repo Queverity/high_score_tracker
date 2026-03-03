@@ -1,105 +1,80 @@
-from helper import *
-import hashlib as hash
-import string
-from game_data_parser import *
-from games import *
+import os
 import csv
+import hashlib
+import string
+from helper import clear_screen, exists
+from game_data_parser import parse_user_info, save_user_info
+from games import game_menu
 
-#define a function that allows for the creation of the account using the already exists checker to check for the user name already exists if so make them use a diffrent username, and if the username is admin
-special_characters = ["!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "-", "_", "=", "+", "[", "]", "{", "}", "|", ":", ";", "'", "<", ">", ",", ".", "?", "/", "`", "~"]
+# paths
+USER_FILE = os.path.join("Documents", "user_info.csv")
+SPECIAL_CHARACTERS = set("!@#$%^&*()-_=+[]{}|:;'<>.,?/~`")
 
 
-def password_requirements(password, username):
+def password_ok(password: str) -> bool:
     if len(password) < 12:
-        print("Your password is not long enough.")
-        passwords(username)
+        return False
+    if not any(c.islower() for c in password):
+        return False
+    if not any(c.isupper() for c in password):
+        return False
+    if not any(c.isdigit() for c in password):
+        return False
+    if not any(c in SPECIAL_CHARACTERS for c in password):
+        return False
+    return True
 
-    else:
 
-        for i in password:
+def hash_pw(item: str) -> str:
+    sha256 = hashlib.sha256()
+    sha256.update(item.encode("utf-8"))
+    return sha256.hexdigest()
 
-            if i in string.ascii_lowercase:
 
-                for a in password:
+def user_exists(username: str) -> bool:
+    return exists(USER_FILE, username)
 
-                    if a in string.ascii_uppercase:
 
-                        for b in password:
+def add_user(username: str, hashed: str) -> None:
+    with open(USER_FILE, "a", newline="") as f:
+        writer = csv.DictWriter(f,
+                                fieldnames=["username", "password",
+                                            "poker_score", "slots_score",
+                                            "blackjack_score"])
+        writer.writerow({"username": username,
+                         "password": hashed,
+                         "poker_score": "",
+                         "slots_score": "",
+                         "blackjack_score": ""})
 
-                            if b in string.digits:
-
-                                for c in password:
-
-                                    if c in special_characters:
-                                        return True
-
-                                    else:
-                                        pass
-                                print("You need a special character in your password.")
-                                passwords(username)
-
-                            else:
-                                pass
-                        print("You need a number in your password.")
-
-                    else:
-                        pass
-                print("You need an uppercase letter in your password.")
-                passwords(username)
-
-            else:
-                pass
-
-        print("You need a lowercase letter in your password.") 
-        passwords(username)
 
 def create_account():
-    account = {}
-    usernames = input("What do you want your username to be")
-    exist = exists("Documents\\user_info.csv", usernames)
-
-    if exist == "yes":
-        print("That username is unavailable. ")
+    while True:
         clear_screen()
-        create_account()
+        name = input("Choose a username: ").strip()
+        if not name:
+            print("Username cannot be blank.")
+            continue
+        if user_exists(name):
+            print("That username is unavailable.")
+            continue
+        pw = input("Choose a password (12+ chars, upper, lower, digit, special): ")
+        if not password_ok(pw):
+            print("Password does not meet requirements.")
+            continue
+        add_user(name, hash_pw(pw))
+        print("Account created.")
+        break
 
-    else:
-        account["username"] = usernames
-        passwords(usernames)
 
-#make a function that gets there password and hashes it
-def passwords(username):
- #get their password
-        password = input("What do you want your password to be? It needs to be at least 12 characters long and have a lowercase letter, an uppercase letter, a number, and a special character.")
-        password_requirements(password, username)
-    #hash there password and save its value
-        password = hashing(password)
-
-#A function that parses the account function
 def parse_user():
+    return parse_user_info()
 
-    with open("Documents//user_info.csv",mode="r",newline='') as scores:
-        fieldnames = ['username','password','score']
-        reader = csv.DictReader(scores,fieldnames)
-        users = []
 
-        for row in reader:
-            users.append(row)
-    return users
-
-#A function that prints the list of users for the admin and takes a input for which account they want to choose than deletes them
 def user_display():
-    user = parse_user()
-
-    for i in range(len(user)):
-        print(f"{i+1}. {user[i]["username"]}")
-    user_num = int(input("What user do you want to delete? Please input only the number. "))
-    return user_num
-
-accounts = parse_user()
-
-def remove(removing):
-    accounts.remove(removing)
+    users = parse_user()
+    for idx, u in enumerate(users, start=1):
+        print(f"{idx}. {u['username']}")
     try:
         with open("Documents\\user_info.csv",mode="w") as users:
             users.write
@@ -148,19 +123,24 @@ def login():
 
             for i in accounts:
 
-                if username == i["username"]:
-                    password = input("What is your password? ")
-                    password = hashing(password)
 
-                    if i["password"] == password:
-                        game_menu()
+def admin():
+    print("1) delete account\n2) exit")
+    action = input().strip()
+    if action == "1":
+        idx = user_display()
+        if idx is not None:
+            remove(idx)
 
-        else:
-            print("Username does not exist. ")
-        
 
-#A function that hashes a string
-def hashing(item):
-    sha256 = hash.sha256()
-    sha256.update(item)
-    return sha256.hexdigest()
+def login():
+    users = parse_user()
+    name = input("What is your username? ").strip()
+    pw = input("What is your password? ")
+    hashed = hash_pw(pw)
+    for u in users:
+        if u["username"] == name and u["password"] == hashed:
+            print("Login successful.")
+            game_menu()
+            return
+    print("Invalid username or password.")
