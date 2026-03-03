@@ -1,6 +1,7 @@
 # CB 1st High Score Functions
 
 import csv
+from game_data_parser import *
 
 # define function personal_highs_printer(user_info,current_user):
     # ask user if they would like to view poker, slots, or blackjack high scores
@@ -115,14 +116,15 @@ def overall_highs_menu(poker_scores,blackjack_scores,slots_scores):
             break
 
 def overall_highs_setter(current_user,new_score,game_scores):
-    for name,score in game_scores.items():
-        if new_score > score:
-            name = current_user
-            score = new_score
-            print("You have set a new high score! View overall high scores in the main menu to see where you stand on the leaderboard.")
-            return game_scores
-        else:
-            pass
+    for i in game_scores:
+        for name,score in i.items():
+            if new_score > score:
+                name = current_user
+                score = new_score
+                print("You have set a new high score! View overall high scores in the main menu to see where you stand on the leaderboard.")
+                return game_scores
+            else:
+                pass
     return game_scores
             
 def high_score_sorter(game,blackjack_scores,poker_scores,slots_scores):

@@ -97,7 +97,7 @@ def not_main():
         else:
             quit = input("Would you like to continue playing? Y/N:\n").strip().capitalize()
             if quit == "Y":
-                return money
+                return int(money)
             else:
                 clear_screen()
 
@@ -112,6 +112,6 @@ def slots_main():
         if choice != "Y":
             break
         else:
-            return money
+            return int(money)
             clear_screen()
 
