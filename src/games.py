@@ -53,7 +53,7 @@ def overall_game_menu(current_user):
                 print("Are you sure you want to exit?")
                 exit = input("Y/N:\n").strip().upper()
                 if exit == "Y":
-                    save_score_files("Documents\slots_scores.csv",slots_scores)
+                    save_score_files("Documents\\slots_scores.csv",slots_scores)
                     save_score_files("Documents\\blackjack_scores.csv",blackjack_scores)
                     save_user_info(user_info)
                     print("Goodbye!")

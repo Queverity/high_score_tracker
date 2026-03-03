@@ -24,3 +24,6 @@ def menu():
             case "4":
                 clear_screen
                 exit()
+            case _:
+                print("That is not a valid option. Please try again.")
+menu()
