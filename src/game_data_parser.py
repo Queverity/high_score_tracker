@@ -81,7 +81,7 @@ def save_score_files(file_path,data):
             writer.writerow(i)
 
 def save_user_info(data):
-    with open("Documents\user_info.csv",mode="w") as user_info:
+    with open("Documents//user_info.csv",mode="w") as user_info:
         fieldnames = ['username','password','poker_score','slots_score','blackjack_score']       
         writer = csv.DictWriter(user_info,fieldnames)
 
