@@ -202,5 +202,5 @@ def game():
         if quit == "Y":
             continue
         else:
-            return money
+            return int(money)
         

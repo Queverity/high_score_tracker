@@ -1,16 +1,3 @@
-import os
-import csv
-import hashlib
-import string
-from helper import clear_screen, exists
-from game_data_parser import *
-from games import game_menu
-
-# paths
-USER_FILE = os.path.join("Documents", "user_info.csv")
-SPECIAL_CHARACTERS = set("!@#$%^&*()-_=+[]{}|:;'<>.,?/~`")
-
-
 def password_ok(password: str) -> bool:
     if len(password) < 12:
         return False

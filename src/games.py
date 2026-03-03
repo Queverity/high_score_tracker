@@ -2,11 +2,11 @@
 from helper import *
 from high_score_functions import personal_highs_printer,personal_highs_setter,overall_highs_menu,overall_highs_setter,high_score_sorter,high_score_writing
 
-from game_data_parser import slots_scores,blackjack_scores,poker_scores,user_info,save_score_files,save_user_info
+from game_data_parser import *
 
 from slots import slots_main
 
-from blackjack import game
+from blackjack import *
 
 def game_menu(slots_scores,blackjack_scores,current_user):
     while True:
@@ -35,7 +35,7 @@ def game_menu(slots_scores,blackjack_scores,current_user):
                 print("Please enter 1 or 2.")
                 continue
 
-def overall_game_menu(current_user):
+def overall_game_menu(current_user,blackjack_scores,slots_scores):
     while True:
         print("What would you like to do?\n1. View Personal High Scores\n2. View All-Time High Scores\n3. Play Games\n4. Exit")
         action = input("Enter Number:\n").strip().lower()

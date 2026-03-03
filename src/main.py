@@ -3,8 +3,9 @@
 from helper import *
 from login import *
 from games import *
+from game_data_parser import *
 #define the main menu function 
-def menu():
+def menu(blackjack_scores,slots_scores):
     print("This is a High Score Manager program! It lets you play a few games, and saves the high scores you get from that game, both in your personal account for the program and in an all-time leaderboard if you're good enough. The games currently devloped are slots and blackjack.\n")
     #use match case to determine what login function they are using and call it.
     while True:
@@ -18,7 +19,8 @@ def menu():
                 login()
             case "2":
                 clear_screen()
-                overall_game_menu(current_user="Guest")
+                current_user = "Guest"
+                overall_game_menu(current_user,blackjack_scores,slots_scores)
             case "3":
                 clear_screen()
                 create_account()
@@ -27,4 +29,4 @@ def menu():
                 exit()
             case _:
                 print("That is not a valid option. Please try again.")
-menu()
+menu(blackjack_scores,slots_scores)
