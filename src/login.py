@@ -3,7 +3,7 @@ import csv
 import hashlib
 import string
 from helper import clear_screen, exists
-from game_data_parser import parse_user_info, save_user_info
+from game_data_parser import *
 from games import game_menu
 
 # paths
@@ -114,23 +114,23 @@ def poker_display():
 
 
 #Create a function that gets there username and uses the checking function to check if the username exists
-def login():
+def login(user_info):
     while True:
         username = input("What is your username? ")
         exists = exists("Documents//user_info.csv",username)
 
         if exists == "yes":
 
-            for i in accounts:
+            for i in user_info:
+                pass
 
-
-def admin():
+"""def admin():
     print("1) delete account\n2) exit")
     action = input().strip()
     if action == "1":
         idx = user_display()
         if idx is not None:
-            remove(idx)
+            remove(idx)"""
 
 
 def login():
