@@ -96,5 +96,4 @@ poker_scores = parse_poker()
 slots_scores = parse_slots()
 user_info = parse_user_info()
 
-for i in blackjack_scores:
-    print(f"{i['username']}: {i['score']}")
+

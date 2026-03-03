@@ -76,20 +76,52 @@ def user_display():
     for idx, u in enumerate(users, start=1):
         print(f"{idx}. {u['username']}")
     try:
-        num = int(input("Number to delete: "))
-        return num - 1
-    except ValueError:
-        return None
+        with open("Documents\\user_info.csv",mode="w") as users:
+            users.write
+    except:
+        print("The thingy didn't work.")
+#define a function that is called when the username is admin that allows for accounts to be removed
+def admin():
+    print("To delete an account press 1\nTo delete a high score press 2\nTo exit press 3")
+    action = input()
+    match action:
+        case "1":
+            user_display()
+            removing = input("Please input the number you want to delete. ")
+            remove(accounts[removing-1])
+
+#define a function that edits the account csv removing or adding accounts to the user csv
+def add(username, password):
+
+    with open("Notes/sample.csv", 'r+', newline='') as csvfile:
+        feildnames = ["username", "password"]
+        reader=csv.reader(csvfile)
+
+        for line in reader:
+            print(f"{feildnames[0]}, {line[0]} favorite color {line[1]}")
+        writer = csv.DictWriter(csvfile, fieldnames=feildnames)
+        #writer.writeheader()
+        writer.writerow({'username':username, 'password':password})
+        
+#A function that prints the list of users for the admin and takes a input for which account they want to choose than deletes them
+def poker_display():
+    user = parse_slots()
+
+    for i in range(len(user)):
+        print(f"{i+1}. {user[i]["username"]}")
+    user_num = int(input("What user do you want to delete? Please input only the number. "))
+    return user_num
 
 
-def remove(index: int):
-    users = parse_user()
-    if 0 <= index < len(users):
-        removed = users.pop(index)
-        save_user_info(users)
-        print(f"Removed {removed['username']}")
-    else:
-        print("Invalid index")
+#Create a function that gets there username and uses the checking function to check if the username exists
+def login():
+    while True:
+        username = input("What is your username? ")
+        exists = exists("Documents//user_info.csv",username)
+
+        if exists == "yes":
+
+            for i in accounts:
 
 
 def admin():

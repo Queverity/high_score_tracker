@@ -5,6 +5,7 @@ from login import *
 from games import *
 #define the main menu function 
 def menu():
+    print("This is a High Score Manager program! It lets you play a few games, and saves the high scores you get from that game, both in your personal account for the program and in an all-time leaderboard if you're good enough. The games currently devloped are slots and blackjack.\n")
     #use match case to determine what login function they are using and call it.
     while True:
         #give them there options
@@ -17,7 +18,7 @@ def menu():
                 login()
             case "2":
                 clear_screen()
-                game_menu()
+                overall_game_menu(current_user="Guest")
             case "3":
                 clear_screen()
                 create_account()
