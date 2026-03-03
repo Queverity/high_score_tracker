@@ -69,7 +69,7 @@ def parse_user_info():
         reader = csv.DictReader(userinfo,fieldnames)
         user_info = []
         for row in reader:
-            slots_scores.append(user_info)
+            user_info.append(row)
     return user_info
 
 def save_score_files(file_path,data):
