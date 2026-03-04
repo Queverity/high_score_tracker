@@ -93,12 +93,12 @@ def personal_highs_setter(current_user,user_info,new_score,game):
 def overall_highs_menu(poker_scores,blackjack_scores,slots_scores):
     def top_ten_printer(mode):
         count = 0
-        for user,score in mode.items():
+        for row in mode:
             if count == 10:
                 return
             else:
                 count += 1
-                print(f"{count}. {user}: {score}")
+                print(f"{count}. {row['username']}: {row['score']}")
     while True:
         game = input("Would you like to view high scores for Poker, Slots, or Blackjack?\n1. Slots\n2. Blackjack\nEnter Number:\n").strip()
         match game:
