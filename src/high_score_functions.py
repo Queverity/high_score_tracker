@@ -116,6 +116,7 @@ def overall_highs_menu(poker_scores,blackjack_scores,slots_scores):
             break
 
 def overall_highs_setter(current_user,new_score,game_scores):
+    new_score = int(new_score)
     for i in game_scores:
         for name,score in i.items():
             if new_score > score:
