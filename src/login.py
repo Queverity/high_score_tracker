@@ -4,7 +4,7 @@ import hashlib
 import string
 from helper import clear_screen, exists
 from game_data_parser import *
-from games import game_menu
+from games import *
 
 # paths
 USER_FILE = os.path.join("Documents", "user_info.csv")
@@ -117,7 +117,7 @@ def remove(accounts):
     print()
 
 
-def login():
+def login(poker_scores,blackjack_scores,slots_scores):
     users = parse_user()
     name = input("What is your username? ").strip()
     pw = input("What is your password? ")
@@ -128,6 +128,6 @@ def login():
     for u in users:
         if u["username"] == name and u["password"] == hashed:
             print("Login successful.")
-            game_menu()
+            overall_game_menu(name,poker_scores,blackjack_scores,slots_scores)
             return
     print("Invalid username or password.")
