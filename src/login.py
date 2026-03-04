@@ -49,8 +49,8 @@ def add_user(username: str, hashed: str) -> None:
 
 
 def create_account():
+    clear_screen()
     while True:
-        clear_screen()
         name = input("Choose a username: ").strip()
         if not name:
             print("Username cannot be blank.")
@@ -113,24 +113,8 @@ def poker_display():
     return user_num
 
 
-#Create a function that gets there username and uses the checking function to check if the username exists
-def login(user_info):
-    while True:
-        username = input("What is your username? ")
-        exists = exists("Documents//user_info.csv",username)
-
-        if exists == "yes":
-
-            for i in user_info:
-                pass
-
-"""def admin():
-    print("1) delete account\n2) exit")
-    action = input().strip()
-    if action == "1":
-        idx = user_display()
-        if idx is not None:
-            remove(idx)"""
+def remove(accounts):
+    print()
 
 
 def login():
@@ -138,6 +122,9 @@ def login():
     name = input("What is your username? ").strip()
     pw = input("What is your password? ")
     hashed = hash_pw(pw)
+    if name == admin:
+        if pw == hash_pw(1234):
+            admin()
     for u in users:
         if u["username"] == name and u["password"] == hashed:
             print("Login successful.")
