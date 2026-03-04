@@ -38,29 +38,38 @@ import csv
 
 def parse_blackjack():
     with open("Documents//blackjack_scores.csv",mode="r",newline='') as scores:
-        fieldnames = ['username','score']
+        fieldnames = ['username','high_score']
         reader = csv.DictReader(scores,fieldnames)
         blackjack_scores = []
         for row in reader:
-            blackjack_scores.append(row)
+            if 'username' in row['username']: 
+                pass
+            else:
+                blackjack_scores.append(row)
     return blackjack_scores
 
 def parse_poker():
     with open("Documents//poker_scores.csv",mode="r",newline='') as scores:
-        fieldnames = ['username','score']
+        fieldnames = ['username','high_score']
         reader = csv.DictReader(scores,fieldnames)
         poker_scores = []
         for row in reader:
-            poker_scores.append(row)
+            if 'username' in row['username']: 
+                pass
+            else:
+                poker_scores.append(row)
     return poker_scores
 
 def parse_slots():
     with open("Documents//slots_scores.csv",mode="r",newline='') as scores:
-        fieldnames = ['username','score']
+        fieldnames = ['username','high_score']
         reader = csv.DictReader(scores,fieldnames)
         slots_scores = []
         for row in reader:
-            slots_scores.append(row)
+            if 'username' in row['username']: 
+                pass
+            else:
+                slots_scores.append(row)
     return slots_scores
 
 def parse_user_info():

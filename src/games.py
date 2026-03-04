@@ -35,7 +35,7 @@ def game_menu(slots_scores,blackjack_scores,current_user):
                 print("Please enter 1 or 2.")
                 continue
 
-def overall_game_menu(current_user,blackjack_scores,slots_scores):
+def overall_game_menu(current_user,poker_scores,blackjack_scores,slots_scores):
     while True:
         print("What would you like to do?\n1. View Personal High Scores\n2. View All-Time High Scores\n3. Play Games\n4. Exit")
         action = input("Enter Number:\n").strip().lower()
@@ -44,7 +44,7 @@ def overall_game_menu(current_user,blackjack_scores,slots_scores):
                 personal_highs_printer(current_user,user_info)
                 pass
             case "2":
-                overall_highs_menu(blackjack_scores,slots_scores)
+                overall_highs_menu(poker_scores,blackjack_scores,slots_scores)
                 pass
             case "3":
                 slots_scores,blackjack_scores = game_menu(slots_scores,blackjack_scores,current_user)
