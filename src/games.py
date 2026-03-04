@@ -1,5 +1,3 @@
-# DJ 1st Games
-
 def overall_game_menu():
     while True:
         print("What would you like to do?\n1. View Personal High Scores\n2. View All-Time High Scores\n3. Play Games\n4. Exit")

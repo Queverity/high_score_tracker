@@ -6,6 +6,10 @@ from helper import *
 
 
 
+yes = ["yes", "y", "yeah", ""]
+
+
+
 def create_deck():
 
     deck = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14] * 4
@@ -155,6 +159,7 @@ def game():
 
             else:
                 print_slow("Please enter valid input.")
+                continue
                 
         
         while calculate_total(dealer_hand) < 17:
@@ -198,9 +203,8 @@ def game():
             clear_screen()
             money += blackjack_bet
 
-        quit = input("Would you like to continue playing? Y/N:\n").strip().capitalize()
-        if quit == "Y":
+        quit = input("Would you like to continue playing? Y/N:\n").strip().lower
+        if quit in yes:
             continue
         else:
             return money
-        
