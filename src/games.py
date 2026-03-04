@@ -6,7 +6,7 @@ from game_data_parser import *
 
 from slots import slots_main
 
-from blackjack import *
+from blackjack import game
 
 def game_menu(slots_scores,blackjack_scores,current_user):
     while True:
