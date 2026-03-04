@@ -16,7 +16,7 @@ def menu(poker_scores,blackjack_scores,slots_scores):
         match action:
             case "1":
                 clear_screen()
-                login()
+                login(poker_scores,blackjack_scores,slots_scores)
             case "2":
                 clear_screen()
                 current_user = "Guest"
