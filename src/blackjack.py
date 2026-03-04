@@ -207,3 +207,5 @@ def game():
             continue
         else:
             return int(money)
+
+game()
