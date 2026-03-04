@@ -43,9 +43,9 @@ def add_user(username: str, hashed: str) -> None:
                                             "blackjack_score"])
         writer.writerow({"username": username,
                          "password": hashed,
-                         "poker_score": "",
-                         "slots_score": "",
-                         "blackjack_score": ""})
+                         "poker_score": 0,
+                         "slots_score": 0,
+                         "blackjack_score": 0})
 
 
 def create_account():
