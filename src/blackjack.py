@@ -105,7 +105,7 @@ def check_blackjack(player_hand, dealer_hand):
         print_slow("Dealer got a Blackjack.")
         return True
 
-def game():
+def blackjack_main():
     clear_screen()
 
     money = 100
