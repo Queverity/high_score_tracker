@@ -84,13 +84,16 @@ def user_display():
         
 #define a function that is called when the username is admin that allows for accounts to be removed
 def admin():
-    print("To delete an account press 1\nTo delete a high score press 2\nTo exit press 3")
+    print("To delete an account press 1\nTo exit press 2")
     action = input()
     match action:
         case "1":
             user_display()
             removing = input("Please input the number you want to delete. ")
-            remove(accounts[removing-1])
+            remove(removing-1)
+            save_user_info(accounts)
+        case "2":
+            login()
 
 #define a function that edits the account csv removing or adding accounts to the user csv
 def add(username, password):
@@ -115,7 +118,8 @@ def poker_display():
     return user_num
 
 
-def remove(accounts):
+def remove(account):
+    accounts.pop(account)
     
 
 
