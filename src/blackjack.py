@@ -6,7 +6,7 @@ from helper import *
 
 
 
-yes = ["y","yes","yeah","","",""]
+yes = ["y","yes","yeah"]
 
 
 
@@ -203,7 +203,9 @@ def blackjack_main():
             money += blackjack_bet
 
         quit = input("Would you like to continue playing? Y/N:\n").strip().lower()
-        if quit in yes:
+        if money < 0:
+            return int(money)
+        elif quit in yes:
             continue
         else:
             return int(money)
