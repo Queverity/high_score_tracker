@@ -129,7 +129,7 @@ def login(poker_scores,blackjack_scores,slots_scores):
     pw = input("What is your password? ")
     hashed = hash_pw(pw)
     if name == "admin":
-        if pw == hash_pw("1234"):
+        if hashed == hash_pw("1234"):
             admin()
     for u in users:
         if u["username"] == name and u["password"] == hashed:
