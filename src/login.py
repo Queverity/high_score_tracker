@@ -116,7 +116,7 @@ def poker_display():
 
 
 def remove(accounts):
-    print()
+    
 
 
 def login(poker_scores,blackjack_scores,slots_scores):
@@ -124,8 +124,8 @@ def login(poker_scores,blackjack_scores,slots_scores):
     name = input("What is your username? ").strip()
     pw = input("What is your password? ")
     hashed = hash_pw(pw)
-    if name == admin:
-        if pw == hash_pw(1234):
+    if name == "admin":
+        if pw == hash_pw("1234"):
             admin()
     for u in users:
         if u["username"] == name and u["password"] == hashed:
