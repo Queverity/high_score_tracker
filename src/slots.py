@@ -67,7 +67,7 @@ def not_main():
         bet = int(bet)
 
         if bet > money:
-            print("You don't got that much.")
+            print("You don't have that much money.")
             continue
         elif bet <= 0:
             print("Bet must be greater than 0.")
@@ -84,23 +84,34 @@ def not_main():
         if payout > 0:
             print(f"You won ${payout}!")
             money += payout
+            play_again = input("Would you like to continue spinning?")
+            if play_again != 'Y':
+                quit = input("Would you like to play another game of slots? [this will reset your money to $100] Y/N:\n").strip().capitalize()
+                if quit == "Y":
+                    clear_screen()
+                    continue
+                else:   
+                    return int(money)
         else:
             print("You lost.")
-
+            play_again = input("Do you want to spin again? (Y/N): ").upper()
+            if play_again != 'Y':
+                quit = input("Would you like to continue playing? Y/N:\n").strip().capitalize()
+                if quit == "Y":
+                    clear_screen()
+                    continue
+                else:
+                    return int(money)
         if money == 0:
             print("\nNo more money!")
-            break
+            return int(money)        
 
         play_again = input("Do you want to spin again? (Y/N): ").upper()
         if play_again != 'Y':
             break
         else:
-            quit = input("Would you like to continue playing? Y/N:\n").strip().capitalize()
-            if quit == "Y":
-                return int(money)
-            else:
-                clear_screen()
-
+            clear_screen()
+            return int(money)
     print(f"Game over!")
 
 
@@ -110,8 +121,8 @@ def slots_main():
         money = not_main()
         choice = input("Do you want to play again? Y/N:\n").upper()
         if choice != "Y":
-            break
-        else:
+            return int(money)
             clear_screen()
-            return money
+        else:
+            continue            
 

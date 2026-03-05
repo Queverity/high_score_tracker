@@ -1,7 +1,6 @@
 import os
 import csv
 import hashlib
-import string
 from helper import clear_screen, exists
 from game_data_parser import *
 from games import *
@@ -70,6 +69,7 @@ def create_account():
 def parse_user():
     return parse_user_info()
 
+accounts = parse_user
 
 def user_display():
     users = parse_user()
@@ -80,15 +80,26 @@ def user_display():
             users.write
     except:
         print("The thingy didn't work.")
+        
 #define a function that is called when the username is admin that allows for accounts to be removed
 def admin():
-    print("To delete an account press 1\nTo delete a high score press 2\nTo exit press 3")
+    print("To delete an account press 1\nTo exit press 2")
     action = input()
     match action:
         case "1":
+            clear_screen()
             user_display()
             removing = input("Please input the number you want to delete. ")
-            remove(accounts[removing-1])
+            try:
+                int(removing)
+                remove(removing-1)
+                save_user_info(accounts)
+            except:
+                print(f"{removing} is not an option please try again")
+                clear_screen()
+                admin()
+        case "2":
+            login()
 
 #define a function that edits the account csv removing or adding accounts to the user csv
 def add(username, password):
@@ -113,8 +124,9 @@ def poker_display():
     return user_num
 
 
-def remove(accounts):
-    print()
+def remove(account):
+    accounts.pop(account)
+    
 
 
 def login(poker_scores,blackjack_scores,slots_scores):
@@ -122,8 +134,8 @@ def login(poker_scores,blackjack_scores,slots_scores):
     name = input("What is your username? ").strip()
     pw = input("What is your password? ")
     hashed = hash_pw(pw)
-    if name == admin:
-        if pw == hash_pw(1234):
+    if name == "admin":
+        if hashed == hash_pw("1234"):
             admin()
     for u in users:
         if u["username"] == name and u["password"] == hashed:
