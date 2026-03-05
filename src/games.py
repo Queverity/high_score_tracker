@@ -14,6 +14,7 @@ def game_menu(slots_scores,blackjack_scores,current_user):
         game = input("Enter number:\n").strip().capitalize()
         match game:
             case "1":
+                game = "Slots"
                 high_score = slots_main()
                 slots_scores = overall_highs_setter(current_user,high_score,slots_scores)
                 slots_scores = high_score_sorter(game,blackjack_scores,poker_scores,slots_scores)
@@ -23,6 +24,7 @@ def game_menu(slots_scores,blackjack_scores,current_user):
                 else:
                     return slots_scores,blackjack_scores
             case "2":
+                game = "Blackjack"
                 high_score = blackjack_main()
                 blackjack_scores = overall_highs_setter(current_user,high_score,blackjack_scores)
                 blackjack_scores = high_score_sorter(game,blackjack_scores,poker_scores,slots_scores)

@@ -136,7 +136,10 @@ def overall_highs_setter(current_user,new_score,game_scores):
             
 def high_score_sorter(game,blackjack_scores,poker_scores,slots_scores):
     def sorter_code(scores):
-        sorted_scores = {k: v for k, v in sorted(scores.items(), key=lambda item: item[1], reverse=True)}
+        sorted_scores = []
+        for i in scores:
+            new_scores = {k: v for k, v in sorted(i.items(), key=lambda item: item[1], reverse=True)}
+            sorted_scores.append(new_scores)
         return sorted_scores
     while True:
         match game:
