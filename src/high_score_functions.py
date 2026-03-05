@@ -103,9 +103,15 @@ def overall_highs_menu(poker_scores,blackjack_scores,slots_scores):
         game = input("Would you like to view high scores for Poker, Slots, or Blackjack?\n1. Slots\n2. Blackjack\nEnter Number:\n").strip()
         match game:
             case "1":
-                top_ten_printer(mode=slots_scores)
+                if bool(slots_scores) == False:
+                    print("There are currently no high scores saved for that game.")
+                else:
+                    top_ten_printer(mode=slots_scores)
             case "2":
-                top_ten_printer(mode=blackjack_scores)
+                if bool(slots_scores) == False:
+                    print("There are currently no high scores saved for that game.")
+                else:
+                    top_ten_printer(mode=blackjack_scores)
             case _:
                 print("Please enter 1, or 2.")
                 continue
@@ -118,9 +124,9 @@ def overall_highs_menu(poker_scores,blackjack_scores,slots_scores):
 def overall_highs_setter(current_user,new_score,game_scores):
     new_score = int(new_score)
     for i in game_scores:
-        for name,score in i.items():
+        for username,score in i.items():
             if new_score > score:
-                name = current_user
+                username = current_user
                 score = new_score
                 print("You have set a new high score! View overall high scores in the main menu to see where you stand on the leaderboard.")
                 return game_scores

@@ -28,5 +28,5 @@ def menu(poker_scores,blackjack_scores,slots_scores):
                 clear_screen
                 exit()
             case _:
-                print("That is not a valid option. Please try again.")
+                print("That is an invalid answer. Please enter 1, 2, 3, or 4.")
 menu(poker_scores,blackjack_scores,slots_scores)

@@ -67,7 +67,7 @@ def not_main():
         bet = int(bet)
 
         if bet > money:
-            print("You don't got that much.")
+            print("You don't have that much money.")
             continue
         elif bet <= 0:
             print("Bet must be greater than 0.")
@@ -84,22 +84,28 @@ def not_main():
         if payout > 0:
             print(f"You won ${payout}!")
             money += payout
+            if play_again != 'Y':
+                quit = input("Would you like to continue playing? Y/N:\n").strip().capitalize()
+                if quit == "Y":
+                    return int(money)
+                else:
+                    clear_screen()
+                    continue
         else:
             print("You lost.")
-
+            play_again = input("Do you want to spin again? (Y/N): ").upper()
+            if play_again != 'Y':
+                quit = input("Would you like to continue playing? Y/N:\n").strip().capitalize()
+                if quit == "Y":
+                    return int(money)
+                else:
+                    clear_screen()
+                    continue
         if money == 0:
             print("\nNo more money!")
             break
 
-        play_again = input("Do you want to spin again? (Y/N): ").upper()
-        if play_again != 'Y':
-            break
-        else:
-            quit = input("Would you like to continue playing? Y/N:\n").strip().capitalize()
-            if quit == "Y":
-                return int(money)
-            else:
-                clear_screen()
+        
 
     print(f"Game over!")
 
@@ -110,8 +116,8 @@ def slots_main():
         money = not_main()
         choice = input("Do you want to play again? Y/N:\n").upper()
         if choice != "Y":
-            break
-        else:
             return int(money)
             clear_screen()
+        else:
+            continue            
 

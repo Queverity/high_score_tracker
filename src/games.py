@@ -1,6 +1,6 @@
 # DJ 1st Games
 from helper import *
-from high_score_functions import personal_highs_printer,personal_highs_setter,overall_highs_menu,overall_highs_setter,high_score_sorter,high_score_writing
+from high_score_functions import *
 
 from game_data_parser import *
 
