@@ -125,8 +125,8 @@ def poker_display():
 
 
 def remove(account):
-    accounts.pop(account)
-    
+    removing = accounts(account)
+    accounts.remove(removing)    
 
 
 def login(poker_scores,blackjack_scores,slots_scores):
