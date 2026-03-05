@@ -1,7 +1,6 @@
 import os
 import csv
 import hashlib
-import string
 from helper import clear_screen, exists
 from game_data_parser import *
 from games import *
@@ -88,10 +87,17 @@ def admin():
     action = input()
     match action:
         case "1":
+            clear_screen()
             user_display()
             removing = input("Please input the number you want to delete. ")
-            remove(removing-1)
-            save_user_info(accounts)
+            try:
+                int(removing)
+                remove(removing-1)
+                save_user_info(accounts)
+            except:
+                print(f"{removing} is not an option please try again")
+                clear_screen()
+                admin()
         case "2":
             login()
 
