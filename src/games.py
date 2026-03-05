@@ -6,7 +6,7 @@ from game_data_parser import *
 
 from slots import slots_main
 
-from blackjack import *
+from blackjack import blackjack_main
 
 def game_menu(slots_scores,blackjack_scores,current_user):
     while True:
@@ -23,7 +23,7 @@ def game_menu(slots_scores,blackjack_scores,current_user):
                 else:
                     return slots_scores,blackjack_scores
             case "2":
-                high_score = game()
+                high_score = blackjack_main()
                 blackjack_scores = overall_highs_setter(current_user,high_score,blackjack_scores)
                 blackjack_scores = high_score_sorter(game,blackjack_scores,poker_scores,slots_scores)
                 continue_playing = input("Would you like to play other games? Y/N: \n").strip().capitalize()

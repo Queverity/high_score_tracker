@@ -112,6 +112,6 @@ def slots_main():
         if choice != "Y":
             break
         else:
-            return int(money)
             clear_screen()
+            return money
 
