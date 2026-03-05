@@ -207,5 +207,3 @@ def blackjack_main():
             continue
         else:
             return int(money)
-
-game()
