@@ -70,6 +70,7 @@ def create_account():
 def parse_user():
     return parse_user_info()
 
+accounts = parse_user
 
 def user_display():
     users = parse_user()
@@ -80,6 +81,7 @@ def user_display():
             users.write
     except:
         print("The thingy didn't work.")
+        
 #define a function that is called when the username is admin that allows for accounts to be removed
 def admin():
     print("To delete an account press 1\nTo delete a high score press 2\nTo exit press 3")

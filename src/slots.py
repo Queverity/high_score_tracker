@@ -89,18 +89,14 @@ def not_main():
 
         if money == 0:
             print("\nNo more money!")
-            break
+            return int(money)
 
         play_again = input("Do you want to spin again? (Y/N): ").upper()
         if play_again != 'Y':
             break
         else:
-            quit = input("Would you like to continue playing? Y/N:\n").strip().capitalize()
-            if quit == "Y":
-                return int(money)
-            else:
-                clear_screen()
-
+            clear_screen()
+            return int(money)
     print(f"Game over!")
 
 
