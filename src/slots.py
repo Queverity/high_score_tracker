@@ -84,23 +84,24 @@ def not_main():
         if payout > 0:
             print(f"You won ${payout}!")
             money += payout
+            play_again = input("Would you like to continue spinning?")
             if play_again != 'Y':
-                quit = input("Would you like to continue playing? Y/N:\n").strip().capitalize()
+                quit = input("Would you like to play another game of slots? [this will reset your money to $100] Y/N:\n").strip().capitalize()
                 if quit == "Y":
-                    return int(money)
-                else:
                     clear_screen()
                     continue
+                else:   
+                    return int(money)
         else:
             print("You lost.")
             play_again = input("Do you want to spin again? (Y/N): ").upper()
             if play_again != 'Y':
                 quit = input("Would you like to continue playing? Y/N:\n").strip().capitalize()
                 if quit == "Y":
-                    return int(money)
-                else:
                     clear_screen()
                     continue
+                else:
+                    return int(money)
         if money == 0:
             print("\nNo more money!")
             break
