@@ -45,7 +45,10 @@ def read_current_highs(game_file_path):
         fieldnames = ['username','high_score']
         dict_reader = csv.DictReader(game_file,fieldnames)
         for i in dict_reader:
-            current_high_scores.append(i)
+            if 'username' in i['username']:
+                pass
+            else:    
+                current_high_scores.append(i)
     return current_high_scores
 
 def personal_highs_printer(current_user,user_info):
@@ -65,7 +68,7 @@ def personal_highs_setter(current_user,user_info,new_score,game):
         case 'Poker':
             for i in user_info:
                 if i['username'] == current_user:
-                    if i['poker_score'] < new_score:
+                    if int(i['poker_score']) < new_score:
                         i['poker_score'] == new_score
                         return
                     else:
@@ -73,7 +76,7 @@ def personal_highs_setter(current_user,user_info,new_score,game):
         case 'Slots':
             for i in user_info:
                 if i['username'] == current_user:
-                    if i['slots_score'] < new_score:
+                    if int(i['slots_score']) < new_score:
                         i['slots_score'] == new_score
                         return
                     else:
@@ -81,7 +84,7 @@ def personal_highs_setter(current_user,user_info,new_score,game):
         case 'Blackjack':
             for i in user_info:
                 if i['username'] == current_user:
-                    if i['blackjack_score'] < new_score:
+                    if int(i['blackjack_score']) < new_score:
                         i['blackjack_score'] == new_score
                         return
                     else:
@@ -98,7 +101,7 @@ def overall_highs_menu(poker_scores,blackjack_scores,slots_scores):
                 return
             else:
                 count += 1
-                print(f"{count}. {row['username']}: {row['score']}")
+                print(f"{count}. {row['username']}: ${row['high_score']}")
     while True:
         clear_screen()
         game = input("Would you like to view high scores for Slots or Blackjack?\n1. Slots\n2. Blackjack\nEnter Number:\n").strip()
@@ -107,13 +110,13 @@ def overall_highs_menu(poker_scores,blackjack_scores,slots_scores):
                 if bool(slots_scores) == False:
                     print("There are currently no high scores saved for that game.")
                 else:
-                    high_scores = read_current_highs("Documents/slots_scores.csv")
+                    high_scores = read_current_highs("Documents//slots_scores.csv")
                     top_ten_printer(high_scores)
             case "2":
                 if bool(blackjack_scores) == False:
                     print("There are currently no high scores saved for that game.")
                 else:
-                    high_scores = read_current_highs("Documents/blackjack_scores.csv")
+                    high_scores = read_current_highs("Documents//blackjack_scores.csv")
                     top_ten_printer(high_scores)
             case _:
                 print("Please enter 1, or 2.")
@@ -134,7 +137,7 @@ def overall_highs_setter(current_user,new_score,game_scores):
         return game_scores
     for i in game_scores:
         for username,score in i.items():
-            if new_score > score:
+            if new_score > int(score):
                 i['username']= current_user
                 i['score'] = new_score
                 print("You have set a new high score! View overall high scores in the main menu to see where you stand on the leaderboard.")
@@ -147,21 +150,22 @@ def overall_highs_setter(current_user,new_score,game_scores):
 def high_score_sorter(game,blackjack_scores,poker_scores,slots_scores):
     def sorter_code(scores):
         
-        sorted_scores = sorted(scores, key=lambda x:x['username'], reverse=True)
+        sorted_scores = sorted(scores, key=lambda x:x['high_score'], reverse=True)
+        print(sorted_scores)
         return sorted_scores
     while True:
         match game:
             case "Blackjack":
                 sorted_scores = sorter_code(blackjack_scores)
                 save_score_files('Documents//blackjack_scores.csv',sorted_scores)
-                return
+                return sorted_scores
             case "Poker":
                 sorted_scores = sorter_code(poker_scores)
                 save_score_files('Documents//poker_scores.csv',sorted_scores)
-                return
+                return sorted_scores
             case "Slots":
                 sorted_scores = sorter_code(slots_scores)
                 save_score_files('Documents//slots_scores.csv',sorted_scores)
-                return
+                return sorted_scores
             case _:
                 print(f"Unexpected value: {game}")

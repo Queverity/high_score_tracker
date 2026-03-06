@@ -19,6 +19,7 @@ def game_menu(slots_scores,blackjack_scores,current_user):
                 high_score = slots_main()
                 slots_scores = overall_highs_setter(current_user,high_score,slots_scores)
                 slots_scores = high_score_sorter(game,blackjack_scores,poker_scores,slots_scores)
+                personal_highs_setter(current_user,user_info,high_score,"Slots")
                 continue_playing = input("Would you like to play other games? Y/N: \n").strip().capitalize()
                 if continue_playing == "Y":
                     continue
@@ -29,6 +30,7 @@ def game_menu(slots_scores,blackjack_scores,current_user):
                 high_score = blackjack_main()
                 blackjack_scores = overall_highs_setter(current_user,high_score,blackjack_scores)
                 blackjack_scores = high_score_sorter(game,blackjack_scores,poker_scores,slots_scores)
+                personal_highs_setter(current_user,user_info,high_score,"Blackjack")
                 continue_playing = input("Would you like to play other games? Y/N: \n").strip().capitalize()
                 if continue_playing == "Y":
                     continue
@@ -38,9 +40,12 @@ def game_menu(slots_scores,blackjack_scores,current_user):
                 print("Please enter 1 or 2.")
                 continue
 
-def overall_game_menu(current_user,poker_scores,blackjack_scores,slots_scores):
+def overall_game_menu(current_user):
     while True:
-        print("What would you like to do?\n1. View Personal High Scores\n2. View All-Time High Scores\n3. Play Games\n4. Exit")
+        poker_scores = parse_poker()
+        blackjack_scores = parse_blackjack()
+        slots_scores = parse_slots()
+        print("What would you like to do?\n1. View Personal High Scores\n2. View All-Time High Scores\n3. Play Games\n4. Log Out")
         action = input("Enter Number:\n").strip().lower()
         match action:
             case "1":

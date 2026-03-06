@@ -46,6 +46,9 @@ def parse_blackjack():
                 pass
             else:
                 blackjack_scores.append(row)
+
+        for row in blackjack_scores:
+            row['high_score'] = int(row['high_score'])
     return blackjack_scores
 
 def parse_poker():
@@ -58,6 +61,9 @@ def parse_poker():
                 pass
             else:
                 poker_scores.append(row)
+        
+        for row in blackjack_scores:
+            row['high_score'] = int(row['high_score'])
     return poker_scores
 
 def parse_slots():
@@ -70,6 +76,9 @@ def parse_slots():
                 pass
             else:
                 slots_scores.append(row)
+
+        for row in blackjack_scores:
+            row['high_score'] = int(row['high_score'])
     return slots_scores
 
 def parse_user_info():
@@ -98,8 +107,10 @@ def save_score_files(file_path,data):
 def save_user_info(data):
     with open("Documents//user_info.csv",mode="w") as user_info:
         fieldnames = ['username','password','poker_score','slots_score','blackjack_score']       
+        first_row = {'username':'username','password':'password','poker_score':'poker_score','slots_score':'slots_score','blackjack_score':'blackjack_score'}
         writer = csv.DictWriter(user_info,fieldnames)
 
+        writer.writerow(first_row)
         for i in data:
             writer.writerow(i)     
 
