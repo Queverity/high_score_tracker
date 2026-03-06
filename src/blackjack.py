@@ -202,6 +202,7 @@ def blackjack_main():
             clear_screen()
             money += blackjack_bet
 
+        print(f"Current money (score): {money}")
         quit = input("Would you like to continue playing? Y/N:\n").strip().lower()
         if money < 0:
             return int(money)

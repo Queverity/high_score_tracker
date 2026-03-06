@@ -82,11 +82,12 @@ def parse_user_info():
     return user_info
 
 def save_score_files(file_path,data):
-    with open(file_path,mode="w") as file:
+    with open(file_path,mode="w",newline="") as file:
         fieldnames = ['username','high_score']
+        first_row = {'username':'username','high_score':'high_score'}
         writer = csv.DictWriter(file,fieldnames)
 
-        writer.writerrow(fieldnames)
+        writer.writerow(first_row)
         
         for i in data:
             writer.writerow(i)
