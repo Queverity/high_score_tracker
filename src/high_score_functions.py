@@ -136,15 +136,15 @@ def overall_highs_setter(current_user,new_score,game_scores):
         print("You have set a new high score! View overall high scores in the main menu to see where you stand on the leaderboard.")
         return game_scores
     for i in game_scores:
-        for username,score in i.items():
-            if new_score > int(score):
-                i['username']= current_user
-                i['score'] = new_score
-                print("You have set a new high score! View overall high scores in the main menu to see where you stand on the leaderboard.")
-                continue_screen()
-                return game_scores
-            else:
-                pass
+        
+        if new_score > int(i['high_score']):
+            i['username']= current_user
+            i['score'] = new_score
+            print("You have set a new high score! View overall high scores in the main menu to see where you stand on the leaderboard.")
+            continue_screen()
+            return game_scores
+        else:
+            pass
     return game_scores
             
 def high_score_sorter(game,blackjack_scores,poker_scores,slots_scores):
