@@ -19,7 +19,7 @@ def game_menu(slots_scores,blackjack_scores,current_user):
                 high_score = slots_main()
                 slots_scores = overall_highs_setter(current_user,high_score,slots_scores)
                 slots_scores = high_score_sorter(game,blackjack_scores,poker_scores,slots_scores)
-                personal_highs_setter(current_user,user_info,high_score,"Slots")
+                user_info = personal_highs_setter(current_user,user_info,high_score,"Slots")
                 continue_playing = input("Would you like to play other games? Y/N: \n").strip().capitalize()
                 if continue_playing == "Y":
                     continue
@@ -30,7 +30,7 @@ def game_menu(slots_scores,blackjack_scores,current_user):
                 high_score = blackjack_main()
                 blackjack_scores = overall_highs_setter(current_user,high_score,blackjack_scores)
                 blackjack_scores = high_score_sorter(game,blackjack_scores,poker_scores,slots_scores)
-                personal_highs_setter(current_user,user_info,high_score,"Blackjack")
+                user_info = personal_highs_setter(current_user,user_info,high_score,"Blackjack")
                 continue_playing = input("Would you like to play other games? Y/N: \n").strip().capitalize()
                 if continue_playing == "Y":
                     continue
