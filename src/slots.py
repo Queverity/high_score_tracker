@@ -88,6 +88,7 @@ def not_main():
             if play_again != 'Y':
                 quit = input("Would you like to play another game of slots? [this will reset your money to $100] Y/N:\n").strip().capitalize()
                 if quit == "Y":
+                    # clear screen here
                     clear_screen()
                     continue
                 else:   
@@ -98,6 +99,7 @@ def not_main():
             if play_again != 'Y':
                 quit = input("Would you like to continue playing? Y/N:\n").strip().capitalize()
                 if quit == "Y":
+                    # clear screen here
                     clear_screen()
                     continue
                 else:
@@ -110,6 +112,7 @@ def not_main():
         if play_again != 'Y':
             break
         else:
+            # clear screen here
             clear_screen()
             return int(money)
     print(f"Game over!")

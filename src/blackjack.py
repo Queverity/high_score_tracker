@@ -106,6 +106,7 @@ def check_blackjack(player_hand, dealer_hand):
         return True
 
 def blackjack_main():
+    # clear screen here
     clear_screen()
 
     money = 100
@@ -120,6 +121,7 @@ def blackjack_main():
         if not blackjack_bet.isdigit():
             print_slow("Please enter valid number.")
             continue_screen()
+            # clear screen here
             clear_screen()
             continue
 
@@ -128,6 +130,7 @@ def blackjack_main():
         if blackjack_bet <= 0 or blackjack_bet > money:
             print_slow("Please enter valid number.")
             continue_screen()
+            # clear screen here
             clear_screen()
             continue
 
@@ -166,6 +169,7 @@ def blackjack_main():
             hit(current_deck, dealer_hand)
 
         continue_screen()
+        # clear screen here
         clear_screen()
 
 
@@ -177,28 +181,33 @@ def blackjack_main():
         if player_total > 21:
             print_slow("You busted.")
             continue_screen()
+            # clear screen here
             clear_screen()
 
         elif dealer_total > 21:
             print_slow("Dealer busted.")
             money += blackjack_bet * 2
             continue_screen()
+            # clear screen here
             clear_screen()
 
         elif player_total > dealer_total:
             print_slow("You win.")
             money += blackjack_bet * 2
             continue_screen()
+            # clear screen here
             clear_screen()
 
         elif player_total < dealer_total:
             print_slow("Dealer wins.")
             continue_screen()
+            # clear screen here
             clear_screen()
 
         elif player_total == dealer_total:
             print_slow("It's a tie.")
             continue_screen()
+            # clear screen here
             clear_screen()
             money += blackjack_bet
 
