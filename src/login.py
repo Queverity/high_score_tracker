@@ -173,6 +173,6 @@ def login(poker_scores,blackjack_scores,slots_scores):
             print("Login successful.")
             continue_screen()
             clear_screen()
-            overall_game_menu(name,poker_scores,blackjack_scores,slots_scores)
+            overall_game_menu(name)
             return
     print("Invalid username or password.")

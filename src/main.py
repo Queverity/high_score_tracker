@@ -25,8 +25,7 @@ def menu(poker_scores,blackjack_scores,slots_scores):
             case "2":
                 clear_screen()
                 current_user = "Guest"
-                overall_game_menu(current_user,poker_scores,blackjack_scores,slots_scores)
-
+                overall_game_menu(current_user)
             case "3":
                 clear_screen()
                 create_account()
