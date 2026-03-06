@@ -145,6 +145,8 @@ def login(poker_scores,blackjack_scores,slots_scores):
     for u in users:
         if u["username"] == name and u["password"] == hashed:
             print("Login successful.")
+            continue_screen()
+            clear_screen()
             overall_game_menu(name,poker_scores,blackjack_scores,slots_scores)
             return
     print("Invalid username or password.")

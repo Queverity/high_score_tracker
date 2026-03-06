@@ -10,6 +10,7 @@ from blackjack import blackjack_main
 
 def game_menu(slots_scores,blackjack_scores,current_user):
     while True:
+        clear_screen()
         print("What game would you like to play?\n1. Slots\n2. Blackjack")
         game = input("Enter number:\n").strip().capitalize()
         match game:
@@ -44,8 +45,10 @@ def overall_game_menu(current_user,poker_scores,blackjack_scores,slots_scores):
         match action:
             case "1":
                 personal_highs_printer(current_user,user_info)
+                clear_screen()
                 pass
             case "2":
+
                 overall_highs_menu(poker_scores,blackjack_scores,slots_scores)
                 pass
             case "3":
