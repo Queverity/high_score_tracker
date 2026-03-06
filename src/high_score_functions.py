@@ -2,6 +2,7 @@
 
 import csv
 from game_data_parser import *
+from helper import *
 
 # define function personal_highs_printer(user_info,current_user):
     # ask user if they would like to view poker, slots, or blackjack high scores
@@ -100,7 +101,8 @@ def overall_highs_menu(poker_scores,blackjack_scores,slots_scores):
                 count += 1
                 print(f"{count}. {row['username']}: {row['score']}")
     while True:
-        game = input("Would you like to view high scores for Poker, Slots, or Blackjack?\n1. Slots\n2. Blackjack\nEnter Number:\n").strip()
+        clear_screen()
+        game = input("Would you like to view high scores for Slots or Blackjack?\n1. Slots\n2. Blackjack\nEnter Number:\n").strip()
         match game:
             case "1":
                 if bool(slots_scores) == False:
@@ -117,18 +119,25 @@ def overall_highs_menu(poker_scores,blackjack_scores,slots_scores):
                 continue
         viewing = input("Would you like to view other high scores? Y/N").strip().capitalize()
         if viewing == "Y":
+            clear_screen()
             continue
         else:
             break
 
 def overall_highs_setter(current_user,new_score,game_scores):
     new_score = int(new_score)
+    if len(game_scores) < 10:
+        new_pair = {current_user:new_score}
+        game_scores.append(new_pair)
+        print("You have set a new high score! View overall high scores in the main menu to see where you stand on the leaderboard.")
+        return game_scores
     for i in game_scores:
         for username,score in i.items():
             if new_score > score:
-                username = current_user
-                score = new_score
+                i['username']= current_user
+                i['score'] = new_score
                 print("You have set a new high score! View overall high scores in the main menu to see where you stand on the leaderboard.")
+                continue_screen()
                 return game_scores
             else:
                 pass
@@ -136,10 +145,8 @@ def overall_highs_setter(current_user,new_score,game_scores):
             
 def high_score_sorter(game,blackjack_scores,poker_scores,slots_scores):
     def sorter_code(scores):
-        sorted_scores = []
-        for i in scores:
-            new_scores = {k: v for k, v in sorted(i.items(), key=lambda item: item[1], reverse=True)}
-            sorted_scores.append(new_scores)
+        
+        sorted_scores = sorted(scores, key=lambda x:x['high_score'], reverse=True)
         return sorted_scores
     while True:
         match game:

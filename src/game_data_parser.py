@@ -86,6 +86,8 @@ def save_score_files(file_path,data):
         fieldnames = ['username','high_score']
         writer = csv.DictWriter(file,fieldnames)
 
+        writer.writerrow(fieldnames)
+        
         for i in data:
             writer.writerow(i)
 
