@@ -70,25 +70,25 @@ def personal_highs_setter(current_user,user_info,new_score,game):
                 if i['username'] == current_user:
                     if int(i['poker_score']) < new_score:
                         i['poker_score'] == new_score
-                        return
+                        return user_info
                     else:
-                        return
+                        return user_info
         case 'Slots':
             for i in user_info:
                 if i['username'] == current_user:
                     if int(i['slots_score']) < new_score:
                         i['slots_score'] == new_score
-                        return
+                        return user_info
                     else:
-                        return
+                        return user_info
         case 'Blackjack':
             for i in user_info:
                 if i['username'] == current_user:
                     if int(i['blackjack_score']) < new_score:
                         i['blackjack_score'] == new_score
-                        return
+                        return user_info
                     else:
-                        return
+                        return user_info
         case _:
             print("Unexpected error")
             return
@@ -135,11 +135,16 @@ def overall_highs_setter(current_user,new_score,game_scores):
         game_scores.append(new_pair)
         print("You have set a new high score! View overall high scores in the main menu to see where you stand on the leaderboard.")
         return game_scores
-    for i in game_scores:
+    
+    
+    reversed_game_scores = sorted(game_scores, key=lambda x:x['high_score'])
+
+    for i in reversed_game_scores:
         
         if new_score > int(i['high_score']):
-            i['username']= current_user
-            i['score'] = new_score
+            game_scores.remove(i)
+            new_pair = {'username':current_user,"high_score":new_score}
+            game_scores.append(new_pair)
             print("You have set a new high score! View overall high scores in the main menu to see where you stand on the leaderboard.")
             continue_screen()
             return game_scores
