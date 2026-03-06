@@ -5,7 +5,7 @@ from collections import Counter
 from itertools import combinations
 
 def new_deck():
-    return[(r,s) for r in range(2, 15) for s in ("Of Spades", "Of Hearts", "Of Diamonds", "Of Clubs")]
+    return[(r,s) for r in range(2, 15) for s in (" Of Spades, ", " Of Hearts, ", " Of Diamonds, ", " Of Clubs, ")]
 
 
 
@@ -162,4 +162,229 @@ def com_action(player_idx, hand, community, chips, current_bet, to_call, pot, po
 
 
 def betting_round(players, active, chips, pot, community, current_bet = 0):
-    pass
+    bets = [0] * len(players)
+    com_moves = []
+
+    while True:
+        changed = False
+
+        if active.count(True) == 1:
+            return pot
+        
+        for i in range(len(players)):
+            
+            if not active:
+                continue
+
+            to_call = current_bet - bets[i]
+
+            if i == 0:
+                clear_screen()
+                print(f"Your Turn")
+                print(f"Your cards: {''.join(card_str(c) for c in players[i])}")
+
+                if community:
+                    print(f"Community cards: {''.join(card_str(c) for c in community)}")
+
+                else:
+                    print(f"Community cards: None")
+                print(f"Pot: {pot} | Your chips: {chips[0]}")
+                print(f"Current bet: {current_bet}\nTo call: {to_call}\n")
+
+                if com_moves:
+                    print("COM moves so far this round:")
+
+                    for move in com_moves:
+                        print(move)
+                
+                while True:
+                    action = input("Check, Call, Raise, Fold").lower()
+
+                    if action == "fold":
+                        active[i] = "fold"
+                        remaining = next((j for j,a in enumerate(active) if a), None)
+
+                        if remaining is not None:
+                            chips[remaining] += pot
+                            print("You fold")
+                            print(f"Player{remaining + 1} wins the pot.")
+                        return pot
+
+                    elif action == "raise":
+                        if chips[i] >= to_call + 10:
+                            chips[i] -= to_call + 10
+                            bets[i] +=to_call + 10
+                            pot += to_call + 10
+                            current_bet += 10
+                            changed = True
+                            print(f"You raise to {current_bet}")
+                            break
+                        
+                        else:
+                            print("Not enough chips to raise. you must call or fold.")
+                            continue
+
+                    elif action == "call" and to_call > 0:
+                        
+                        if chips[i] >= to_call:
+                            chips[i] -= to_call
+                            bets[i] += to_call
+                            pot += to_call
+                            print("You call.")
+                            break
+
+                        else:
+                            print("Not enough chips to call. You must fold.")
+                            continue
+
+                    elif action == "check" and to_call == 0:
+                        print("You check")
+                        break
+                    
+                    else:
+                        print("Invalid action. Try again.")
+                        continue
+            
+            else:
+                position = i
+                action, amount = com_action(i, players[i], community, chips, current_bet, to_call, pot, position)
+                
+                if action == 'fold':
+                    active[i] = False
+                    move = (f"Player {i+1} folds")
+                    com_moves.append(move)
+
+                elif action == 'call':
+                    chips[i] -= amount
+                    bets[i] += amount
+                    pot += amount
+                    move = (f"Player {i+1} calls")
+                    com_moves.append(move)
+
+                elif action == 'raise':
+                    total_raise = to_call+amount
+                    if total_raise > chips[i]:
+                        total_raise = chips[i]
+                    chips[i] -= total_raise
+                    bets[i] += total_raise
+                    pot += total_raise
+                    current_bet = max(current_bet,bets[i])
+                    changed = True
+                    move = (f"Player {i + 1} raises to {current_bet}")
+                    com_moves.append(move)
+                print(move)
+                time.sleep(1)
+        if all(not active[i] or bets[i] == current_bet for i in range(len(players))):
+            break
+
+    return pot
+
+
+def play():
+    chips = [100] * 4
+    dealer = 0
+
+    while sum(c > 0 for c in chips) > 1:
+        clear_screen()
+        print(f"--- New Hand ---")
+        deck = new_deck()
+        random.shuffle(deck)
+        players = [[deck.pop(), deck.pop()] for _ in range(4)]
+        active = [chips[i] > 0 for i in range(4)]
+        pot = 0
+        community = []
+        starting_bet = 5
+
+        for i in range(4):
+            if active[i]:
+                chips[i] -= starting_bet
+                pot+=starting_bet
+        
+        print(f"Your hole cards: {' '.join(card_str(c) for c in players[0])}")
+        print(f"Automatic starting bet of {starting_bet} chips from each player. Pot is now {pot}.")
+
+        pot = betting_round(players, active, chips, pot, community)
+
+        if sum(active) == 1:
+            winner = next((i for i, a in enumerate(active) if a), None)
+
+            if winner is not None:
+                chips[winner] += pot
+                print(f"Player {winner+1} wins the pot")
+
+            if input("Start a new hand? (y/n): ").lower() != 'y':
+                break
+            continue
+
+        community = [deck.pop() for _ in range(3)]
+        print(f"Flop: {' '.join(card_str(c) for c in community)}")
+        pot = betting_round(players, active, chips, pot, community)
+
+        if sum(active) == 1:
+            winner = next((i for i,a in enumerate(active) if a), None)
+
+            if winner is not None:
+                chips[winner] += pot
+                print(f"Player {winner + 1} wins the pot")
+
+            if input("Start a new hand? (y/n): ").lower()!='y':
+                break
+            continue
+
+        community.append(deck.pop())
+        print(f"Turn: {card_str(community[-1])}")
+        pot = betting_round(players, active, chips, pot, community)
+
+        if sum(active) == 1:
+            winner=next((i for i,a in enumerate(active) if a), None)
+
+            if winner is not None:
+                chips[winner] += pot
+                print(f"Player {winner+1} wins the pot")
+
+            if input("Start a new hand? (y/n): ").lower()!='y':
+                break
+
+            continue
+
+        community.append(deck.pop())
+        print(f"River: {card_str(community[-1])}")
+        pot = betting_round(players, active, chips, pot, community)
+
+        if sum(active) == 1:
+            winner = next((i for i,a in enumerate(active) if a), None)
+
+            if winner is not None:
+                chips[winner] += pot
+                print(f"Player {winner+1} wins the pot")
+
+            if input("Start a new hand? (y/n): ").lower() != 'y':
+                break
+            continue
+
+        results = {}
+
+        for i in range(4):
+
+            if active[i]:
+                results[i] = best_hand(players[i] + community)
+
+        if results:
+            winner=max(results, key = lambda k: results[k])
+            chips[winner] += pot
+            print(f"Player {winner + 1} wins the pot")
+        print("Current chip counts:")
+
+        for i, c in enumerate(chips):
+            print(f"Player {i + 1}: {c}")
+
+        if input("Start a new hand? (y/n): ").lower()!='y':
+            break
+
+        dealer = (dealer + 1) % 4
+
+    winner = max(range(4), key = lambda i: chips[i])
+    print(f"Game over! Player {winner + 1} wins with {chips[winner]} chips.")
+
+
+play()
