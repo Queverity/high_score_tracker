@@ -48,6 +48,7 @@ def add_user(username: str, hashed: str) -> None:
 
 
 def create_account():
+    # clear screen here
     clear_screen()
     while True:
         name = input("Choose a username: ").strip()
@@ -69,37 +70,37 @@ def create_account():
 def parse_user():
     return parse_user_info()
 
-accounts = parse_user
 
-def user_display():
-    users = parse_user()
+def user_display(users):
     for idx, u in enumerate(users, start=1):
         print(f"{idx}. {u['username']}")
-    try:
-        with open("Documents\\user_info.csv",mode="w") as users:
-            users.write
-    except:
-        print("The thingy didn't work.")
-        
+
+
 #define a function that is called when the username is admin that allows for accounts to be removed
 def admin():
-    print("To delete an account press 1\nTo exit press 2")
-    action = input()
-    match action:
-        case "1":
-            clear_screen()
-            user_display()
-            removing = input("Please input the number you want to delete. ")
-            try:
-                int(removing)
-                remove(removing-1)
-                save_user_info(accounts)
-            except:
-                print(f"{removing} is not an option please try again")
+    while True:
+        print("To delete an account press 1\nTo exit press 2")
+        action = input().strip()
+        match action:
+            case "1":
+                # clear screen here
                 clear_screen()
-                admin()
-        case "2":
-            login()
+                users = parse_user()
+                user_display(users)
+                removing = input("Please input the number you want to delete. ").strip()
+                if not removing.isdigit():
+                    print(f"{removing} is not an option please try again")
+                    continue
+                idx = int(removing) - 1
+                removed = remove(idx)
+                if removed:
+                    print(f"Removed account: {removed['username']}")
+                else:
+                    print(f"{removing} is not an option please try again")
+            case "2":
+                return
+            case _:
+                print("Invalid selection. Please try again.")
 
 #define a function that edits the account csv removing or adding accounts to the user csv
 def add(username, password):
@@ -119,14 +120,18 @@ def poker_display():
     user = parse_slots()
 
     for i in range(len(user)):
-        print(f"{i+1}. {user[i]["username"]}")
+        print(f"{i+1}. {user[i]['username']}")
     user_num = int(input("What user do you want to delete? Please input only the number. "))
     return user_num
 
 
-def remove(account):
-    removing = accounts(account)
-    accounts.remove(removing)    
+def remove(index):
+    users = parse_user()
+    if 0 <= index < len(users):
+        removed = users.pop(index)
+        save_user_info(users)
+        return removed
+    return None
 
 
 def login(poker_scores,blackjack_scores,slots_scores):

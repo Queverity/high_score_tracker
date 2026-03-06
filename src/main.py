@@ -25,8 +25,9 @@ def menu(poker_scores,blackjack_scores,slots_scores):
                 clear_screen()
                 create_account()
             case "4":
-                clear_screen
+                clear_screen()
                 exit()
             case _:
+                clear_screen()
                 print("That is an invalid answer. Please enter 1, 2, 3, or 4.")
 menu(poker_scores,blackjack_scores,slots_scores)

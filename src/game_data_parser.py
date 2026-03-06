@@ -78,6 +78,9 @@ def parse_user_info():
         reader = csv.DictReader(userinfo,fieldnames)
         user_info = []
         for row in reader:
+            # skip header row and any empty lines
+            if not row.get('username') or row.get('username').lower() == 'username':
+                continue
             user_info.append(row)
     return user_info
 
