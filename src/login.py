@@ -44,14 +44,9 @@ def add_user(username: str, hashed: str) -> None:
 
     with open(USER_FILE, "a", newline="") as f:
         writer = csv.DictWriter(f,
-                                fieldnames=["username", "password",
-                                            "poker_score", "slots_score",
-                                            "blackjack_score"])
+                                fieldnames=["username", "password"])
         writer.writerow({"username": username,
-                         "password": hashed,
-                         "poker_score": 0,
-                         "slots_score": 0,
-                         "blackjack_score": 0})
+                         "password": hashed})
 
 
 def create_account():
@@ -137,13 +132,6 @@ def add(username, password):
         writer.writerow({'username':username, 'password':password})
         
 #A function that prints the list of users for the admin and takes a input for which account they want to choose than deletes them
-def poker_display():
-    user = parse_slots()
-
-    for i in range(len(user)):
-        print(f"{i+1}. {user[i]['username']}")
-    user_num = int(input("What user do you want to delete? Please input only the number. "))
-    return user_num
 
 
 def remove(index):
@@ -156,7 +144,7 @@ def remove(index):
     return None
 
 
-def login(poker_scores,blackjack_scores,slots_scores):
+def login():
     users = parse_user()
     name = input("What is your username? ").strip()
     pw = input("What is your password? ")

@@ -6,8 +6,8 @@ from games import *
 from game_data_parser import *
 
 #define the main menu function 
-def menu(poker_scores,blackjack_scores,slots_scores):
-    print("This is a High Score Manager program! It lets you play a few games, and saves the high scores you get from that game, both in your personal account for the program and in an all-time leaderboard if you're good enough.\nThe games currently devloped are slots and blackjack.\n")
+def menu(blackjack_scores,slots_scores):
+    print("This is a High Score Manager program! It lets you play a few games, and saves the high scores you get from that game in an all-time leaderboard if you're good enough.\nThe games currently devloped are slots and blackjack.\n")
     #use match case to determine what login function they are using and call it.
 
     while True:
@@ -20,7 +20,7 @@ def menu(poker_scores,blackjack_scores,slots_scores):
 
             case "1":
                 clear_screen()
-                login(poker_scores,blackjack_scores,slots_scores)
+                login()
 
             case "2":
                 clear_screen()
@@ -38,4 +38,4 @@ def menu(poker_scores,blackjack_scores,slots_scores):
                 clear_screen()
                 print("That is an invalid answer. Please enter 1, 2, 3, or 4.")
 
-menu(poker_scores,blackjack_scores,slots_scores)
+menu(blackjack_scores,slots_scores)

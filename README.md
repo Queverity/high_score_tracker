@@ -7,10 +7,10 @@ This is a program that includes a few casino games (poker, slots, blackjack), an
 
 ## Project Features
 - Multiple Casino-like games
-- User Accounts
-- High Score Saving
+- User Accounts (Just username and password)
+- High Score Saving per Game
 - Basic password encryption
-- Admin functionality
+- Admin functionality (Username is admin, password is 1234)
 
 ## Contributors
 - Queverity

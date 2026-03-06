@@ -54,61 +54,7 @@ def read_current_highs(game_file_path):
                 current_high_scores.append(i)
     return current_high_scores
 
-def personal_highs_printer(current_user,user_info):
-
-    if current_user == "Guest": 
-        print("You are a guest, and thus your personal high scores are not saved. Perhaps make an account?")
-        continue_screen()
-        return
-
-    else:
-
-        for i in user_info:
-
-            if i['username'] == current_user:
-                print(f"Poker High Score: {i['poker_score']}\nSlots High Score: {i['slots_score']}\nBlackjack High Score: {i['blackjack_score']}")
-                return
-
-def personal_highs_setter(current_user,user_info,new_score,game):
-
-    if current_user == "Guest": return
-
-    match game:
-        case 'Poker':
-
-            for i in user_info:
-
-                if i['username'] == current_user:
-                    if int(i['poker_score']) < new_score:
-                        i['poker_score'] == new_score
-                        return user_info
-                    else:
-                        return user_info
-        case 'Slots':
-
-            for i in user_info:
-
-                if i['username'] == current_user:
-                    if int(i['slots_score']) < new_score:
-                        i['slots_score'] == new_score
-                        return user_info
-                    else:
-                        return user_info
-        case 'Blackjack':
-
-            for i in user_info:
-
-                if i['username'] == current_user:
-                    if int(i['blackjack_score']) < new_score:
-                        i['blackjack_score'] == new_score
-                        return user_info
-                    else:
-                        return user_info
-        case _:
-            print("Unexpected error")
-            return
-
-def overall_highs_menu(poker_scores,blackjack_scores,slots_scores):
+def overall_highs_menu(blackjack_scores,slots_scores):
 
     def top_ten_printer(mode):
         count = 0
@@ -182,12 +128,11 @@ def overall_highs_setter(current_user,new_score,game_scores):
             pass
     return game_scores
             
-def high_score_sorter(game,blackjack_scores,poker_scores,slots_scores):
+def high_score_sorter(game,blackjack_scores,slots_scores):
 
     def sorter_code(scores):
         
         sorted_scores = sorted(scores, key=lambda x:x['high_score'], reverse=True)
-        print(sorted_scores)
         return sorted_scores
 
     while True:
@@ -197,10 +142,6 @@ def high_score_sorter(game,blackjack_scores,poker_scores,slots_scores):
             case "Blackjack":
                 sorted_scores = sorter_code(blackjack_scores)
                 save_score_files('Documents//blackjack_scores.csv',sorted_scores)
-                return sorted_scores
-            case "Poker":
-                sorted_scores = sorter_code(poker_scores)
-                save_score_files('Documents//poker_scores.csv',sorted_scores)
                 return sorted_scores
             case "Slots":
                 sorted_scores = sorter_code(slots_scores)
